@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "136320604424",
+    "firebase_url": "https://login-e6e52.firebaseio.com",
+    "project_id": "login-e6e52",
+    "storage_bucket": "login-e6e52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:136320604424:android:f6a7bf3a0d8e0d15cdf4bd",
+        "android_client_info": {
+          "package_name": "com.wah.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "136320604424-qo7p1p6t11ccmavti8udhh9ndv1knmi2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx0gsIPo7Mlpp8sCD1xLzBh_p1g7X6htc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "136320604424-qo7p1p6t11ccmavti8udhh9ndv1knmi2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
