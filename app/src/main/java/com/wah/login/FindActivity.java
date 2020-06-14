@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.wah.login.R;
 
 public class FindActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "FindActivity";

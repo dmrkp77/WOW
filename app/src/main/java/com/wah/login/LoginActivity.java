@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.wah.login.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     //define view objects
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //그리고 profile 액티비티를 연다.
             startActivity(new Intent(getApplicationContext(), ContentActivity.class)); //추가해 줄 ProfileActivity
         }
+
         //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
