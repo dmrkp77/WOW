@@ -86,8 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
                         } else {
                             //에러발생시
-                            textviewMessage.setText("에러유형\n - 이미 등록된 이메일  \n -암호 최소 6자리 이상 \n - 서버에러");
-                            Toast.makeText(MainActivity.this, "등록 에러!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "등록에러\n - 이미 등록된 이메일  \n - 암호 최소 6자리 이상 \n - 서버에러", Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
                     }
