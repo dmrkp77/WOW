@@ -112,6 +112,7 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
             alert_confirm.show();
         }
 
+        //버튼을 눌러 각 액티비티에 맞는 화면으로 이동한다.
         if (view == musicbtn) {
             startActivity(new Intent(this, MusicActivity.class));
         }
