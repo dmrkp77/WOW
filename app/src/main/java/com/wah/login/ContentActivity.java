@@ -28,7 +28,12 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
     private TextView textViewUserEmail;
     private Button buttonLogout;
     private TextView textivewDelete;
-
+    private Button musicbtn;
+    private Button readingbtn;
+    private Button travelbtn;
+    private Button exercisebtn;
+    private Button tvbtn;
+    private Button moviebtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,12 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
         textViewUserEmail = (TextView) findViewById(R.id.textviewUserEmail);
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
         textivewDelete = (TextView) findViewById(R.id.textviewDelete);
+        musicbtn = (Button) findViewById(R.id.musicbtn);
+        readingbtn = (Button) findViewById(R.id.readingbtn);
+        travelbtn = (Button) findViewById(R.id.travelbtn);
+        exercisebtn = (Button) findViewById(R.id.exercisebtn);
+        tvbtn = (Button) findViewById(R.id.tvbtn);
+        moviebtn = (Button) findViewById(R.id.moviebtn);
 
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -57,7 +68,12 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
         //logout button event
         buttonLogout.setOnClickListener(this);
         textivewDelete.setOnClickListener(this);
-
+        musicbtn.setOnClickListener(this);
+        readingbtn.setOnClickListener(this);
+        travelbtn.setOnClickListener(this);
+        exercisebtn.setOnClickListener(this);
+        tvbtn.setOnClickListener(this);
+        moviebtn.setOnClickListener(this);
 
     }
 
@@ -94,6 +110,26 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
                 }
             });
             alert_confirm.show();
+        }
+
+        if (view == musicbtn) {
+            startActivity(new Intent(this, MusicActivity.class));
+        }
+
+        if (view == readingbtn) {
+            startActivity(new Intent(this, MusicActivity.class));
+        }
+        if (view == travelbtn) {
+            startActivity(new Intent(this, MusicActivity.class));
+        }
+        if (view == exercisebtn) {
+            startActivity(new Intent(this, MusicActivity.class));
+        }
+        if (view == tvbtn) {
+            startActivity(new Intent(this, MusicActivity.class));
+        }
+        if (view == moviebtn) {
+            startActivity(new Intent(this, MusicActivity.class));
         }
     }
 }
