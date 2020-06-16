@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.wah.login.R;
+import com.wah.login.menu.SportsActivity;
 
 public class ContentActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "ContentActivity";
@@ -124,7 +125,7 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(new Intent(this, MusicActivity.class));
         }
         if (view == exercisebtn) {
-            startActivity(new Intent(this, MusicActivity.class));
+            startActivity(new Intent(this, SportsActivity.class));
         }
         if (view == tvbtn) {
             startActivity(new Intent(this, MusicActivity.class));
