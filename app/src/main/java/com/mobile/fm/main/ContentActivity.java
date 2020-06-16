@@ -1,4 +1,4 @@
-package com.wah.login;
+package com.mobile.fm.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,25 +7,34 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.wah.login.R;
+import com.mobile.fm.R;
+import com.mobile.fm.login.LoginActivity;
+import com.mobile.fm.login.MainActivity;
 
-public class ContentActivity extends AppCompatActivity implements View.OnClickListener {
+public class ContentActivity extends AppCompatActivity {
     private static final String TAG = "ContentActivity";
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
 
+    //menu objects
+    BottomNavigationView bottomNavigationView;
+    ActionBookmark actionBookmark;
+    ActionHome actionHome;
+    ActionSearch actionSearch;
+    ActionUser actionUser;
+
     //view objects
-    private TextView textViewUserEmail;
+   /* private TextView textViewUserEmail;
     private Button buttonLogout;
     private TextView textivewDelete;
     private Button musicbtn;
@@ -33,15 +42,22 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
     private Button travelbtn;
     private Button exercisebtn;
     private Button tvbtn;
-    private Button moviebtn;
+    private Button moviebtn;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        //making fragment
+        actionBookmark = new ActionBookmark();
+        actionHome = new ActionHome();
+        actionSearch = new ActionSearch();
+        actionUser = new ActionUser();
 
         //initializing views
-        textViewUserEmail = (TextView) findViewById(R.id.textviewUserEmail);
+       /* textViewUserEmail = (TextView) findViewById(R.id.textviewUserEmail);
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
         textivewDelete = (TextView) findViewById(R.id.textviewDelete);
         musicbtn = (Button) findViewById(R.id.musicbtn);
@@ -49,7 +65,7 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
         travelbtn = (Button) findViewById(R.id.travelbtn);
         exercisebtn = (Button) findViewById(R.id.exercisebtn);
         tvbtn = (Button) findViewById(R.id.tvbtn);
-        moviebtn = (Button) findViewById(R.id.moviebtn);
+        moviebtn = (Button) findViewById(R.id.moviebtn);*/
 
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -63,21 +79,62 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //textViewUserEmail의 내용을 변경해 준다.
-        textViewUserEmail.setText("반갑습니다.\n" + user.getEmail() + "으로 로그인 하였습니다.");
+        //textViewUserEmail.setText("반갑습니다.\n" + user.getEmail() + "으로 로그인 하였습니다.");
 
         //logout button event
-        buttonLogout.setOnClickListener(this);
+        /*buttonLogout.setOnClickListener(this);
         textivewDelete.setOnClickListener(this);
         musicbtn.setOnClickListener(this);
         readingbtn.setOnClickListener(this);
         travelbtn.setOnClickListener(this);
         exercisebtn.setOnClickListener(this);
         tvbtn.setOnClickListener(this);
-        moviebtn.setOnClickListener(this);
+        moviebtn.setOnClickListener(this);*/
 
+        //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_layout,actionHome).commitAllowingStateLoss();
+
+        //bottomnavigationview의 아이콘을 선택 했을때 원하는 프래그먼트가 띄워질 수 있도록 리스너를 추가합니다.
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    switch (menuItem.getItemId()){
+
+                    //menu_bottom.xml에서 지정해줬던 아이디 값을 받아와서 각 아이디값마다 다른 이벤트를 발생시킵니다.
+                    case R.id.action_home:{
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.content_layout,actionHome).commitAllowingStateLoss();
+                        return true;
+                    }
+
+                    case R.id.action_search:{
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.content_layout,actionSearch).commitAllowingStateLoss();
+                        return true;
+                    }
+
+                    case R.id.action_bookmark:{
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.content_layout,actionBookmark).commitAllowingStateLoss();
+                        return true;
+                    }
+
+                    case R.id.action_user: {
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.content_layout, actionUser).commitAllowingStateLoss();
+                        return true;
+                    }
+
+                    default: return false;
+
+                }
+            }
+        });
     }
 
-    @Override
+    /*@Override
     public void onClick(View view) {
         if (view == buttonLogout) {
             firebaseAuth.signOut();
@@ -132,5 +189,5 @@ public class ContentActivity extends AppCompatActivity implements View.OnClickLi
         if (view == moviebtn) {
             startActivity(new Intent(this, MusicActivity.class));
         }
-    }
+    }*/
 }

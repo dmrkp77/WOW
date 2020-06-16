@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wah.login">
+    package="com.mobile.fm">
 
     <application
         android:allowBackup="true"
@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.MusicActivity"></activity>
-        <activity android:name=".login.FindActivity" />
-        <activity android:name=".ContentActivity" />
-        <activity android:name=".login.MainActivity" />
-        <activity android:name=".menu.SportsActivity" />
-        <activity android:name=".menu.WritePostActivity" />
-        <activity android:name=".login.LoginActivity">
+        <!--<activity android:name="com.mobile.fm.main.ActionBookmark"></activity>
+        <activity android:name="com.mobile.fm.main.ActionUser" />
+        <activity android:name="com.mobile.fm.main.ActionSearch" />
+        <activity android:name="com.mobile.fm.main.ActionHome" />-->
+        <activity android:name="com.mobile.fm.main.MusicActivity" />
+        <activity android:name="com.mobile.fm.login.FindActivity" />
+        <activity android:name="com.mobile.fm.main.ContentActivity" />
+        <activity android:name="com.mobile.fm.login.MainActivity" />
+        <activity android:name="com.mobile.fm.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
