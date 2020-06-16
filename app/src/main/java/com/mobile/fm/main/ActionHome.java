@@ -113,7 +113,7 @@ public class ActionHome extends Fragment implements View.OnClickListener {
             startActivity(new Intent(getContext(), MusicActivity.class));
         }
         if (view == exercisebtn) {
-            startActivity(new Intent(getContext(), MusicActivity.class));
+            startActivity(new Intent(getContext(), SportsActivity.class));
         }
         if (view == tvbtn) {
             startActivity(new Intent(getContext(), MusicActivity.class));
