@@ -20,7 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="5dp"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:text="제목" />
@@ -47,17 +47,16 @@
                     />
                 <TextView
                     android:id="@+id/tv_userName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="닉네임" />
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="34dp"
+                    android:layout_width="25dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="230dp"
+                    android:layout_gravity="center_vertical"
                     app:srcCompat="?android:attr/textSelectHandleLeft" />
 
                 <TextView

@@ -52,8 +52,13 @@ public class ExerciseActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("check", document.getId() + " => " + document.getData());
-                                arrayList.add(new User(document.getData().get("title").toString(),document.getData().get("content").toString(),
-                                        "시간",document.getData().get("userName").toString(),1));
+                                String str = document.getData().get("time").toString();
+                                String str1="";
+                                for(int i =0;i<str.length();i++){
+                                    if(str.charAt(i)==' ')break;
+                                    str1+=str.charAt(i);
+                                }
+                                arrayList.add(new User(document.getData().get("title").toString(),document.getData().get("content").toString(), str1,document.getData().get("userName").toString(),1));
                             }
                         } else {
                             Log.w("check", "Error getting documents.", task.getException());
@@ -70,6 +75,7 @@ public class ExerciseActivity extends AppCompatActivity {
             switch (view.getId()){
                 case R.id.addTextBtn2:
                     myStartActivity(WritePostActivity.class);
+
                     break;
             }
         }
@@ -78,5 +84,6 @@ public class ExerciseActivity extends AppCompatActivity {
     private void myStartActivity(Class c){
         Intent intent=new Intent(this,c);
         startActivity(intent);
+        finish();
     }
 }
