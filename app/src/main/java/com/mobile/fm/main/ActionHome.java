@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.mobile.fm.R;
 import com.mobile.fm.exerciseboard.ExerciseActivity;
+import com.mobile.fm.music.MusicActivity;
 
 import javax.annotation.Nullable;
 

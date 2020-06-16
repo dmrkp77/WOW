@@ -13,7 +13,8 @@
         <activity android:name="com.mobile.fm.main.ActionUser" />
         <activity android:name="com.mobile.fm.main.ActionSearch" />
         <activity android:name="com.mobile.fm.main.ActionHome" />-->
-        <activity android:name="com.mobile.fm.main.MusicActivity" />
+        <activity android:name="com.mobile.fm.music.MusicActivity" />
+        <activity android:name="com.mobile.fm.music.MusicListActivity" />
         <activity android:name="com.mobile.fm.exerciseboard.WritePostActivity" />
         <activity android:name="com.mobile.fm.exerciseboard.ExerciseActivity" />
         <activity android:name="com.mobile.fm.login.FindActivity" />
