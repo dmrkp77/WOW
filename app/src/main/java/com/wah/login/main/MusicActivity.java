@@ -1,8 +1,10 @@
-package com.wah.login;
+package com.wah.login.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.wah.login.R;
 
 public class MusicActivity extends AppCompatActivity {
 
