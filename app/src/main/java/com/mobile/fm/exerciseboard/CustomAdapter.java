@@ -56,9 +56,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             super(itemView);
             this.tv_title=itemView.findViewById(R.id.tv_title);
             this.tv_content=itemView.findViewById(R.id.tv_content);
-            this.tv_time=itemView.findViewById(R.id.tv_content);
+            this.tv_time=itemView.findViewById(R.id.tv_time);
             this.tv_userName=itemView.findViewById(R.id.tv_userName);
-            this.tv_commentNumber=itemView.findViewById(R.id.tv_content);
+            this.tv_commentNumber=itemView.findViewById(R.id.tv_commentNumber);
         }
     }
 }
