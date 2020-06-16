@@ -3,22 +3,15 @@ package com.mobile.fm.main;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mobile.fm.R;
 import com.mobile.fm.login.LoginActivity;
-import com.mobile.fm.login.MainActivity;
 
 public class ContentActivity extends AppCompatActivity {
     private static final String TAG = "ContentActivity";
@@ -43,6 +36,21 @@ public class ContentActivity extends AppCompatActivity {
     private Button exercisebtn;
     private Button tvbtn;
     private Button moviebtn;*/
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Intent intent = getIntent();
+        Boolean logout = intent.getBooleanExtra("로그아웃", false);
+
+        if (logout.equals(true)) {
+            firebaseAuth.signOut();
+            intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,47 +99,48 @@ public class ContentActivity extends AppCompatActivity {
         tvbtn.setOnClickListener(this);
         moviebtn.setOnClickListener(this);*/
 
+
         //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_layout,actionHome).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, actionHome).commitAllowingStateLoss();
 
         //bottomnavigationview의 아이콘을 선택 했을때 원하는 프래그먼트가 띄워질 수 있도록 리스너를 추가합니다.
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                            //menu.xml에서 지정해줬던 아이디 값을 받아와서 각 아이디값마다 다른 이벤트를 발생시킵니다.
+                            case R.id.action_home: {
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, actionHome).commitAllowingStateLoss();
+                                return true;
+                            }
 
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    switch (menuItem.getItemId()){
+                            case R.id.action_search: {
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, actionSearch).commitAllowingStateLoss();
+                                return true;
+                            }
 
-                    //menu_bottom.xml에서 지정해줬던 아이디 값을 받아와서 각 아이디값마다 다른 이벤트를 발생시킵니다.
-                    case R.id.action_home:{
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.content_layout,actionHome).commitAllowingStateLoss();
-                        return true;
+                            case R.id.action_bookmark: {
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, actionBookmark).commitAllowingStateLoss();
+                                return true;
+                            }
+
+                            case R.id.action_user: {
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.content_layout, actionUser).commitAllowingStateLoss();
+                                return true;
+                            }
+
+                            default:
+                                return false;
+
+                        }
                     }
-
-                    case R.id.action_search:{
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.content_layout,actionSearch).commitAllowingStateLoss();
-                        return true;
-                    }
-
-                    case R.id.action_bookmark:{
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.content_layout,actionBookmark).commitAllowingStateLoss();
-                        return true;
-                    }
-
-                    case R.id.action_user: {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.content_layout, actionUser).commitAllowingStateLoss();
-                        return true;
-                    }
-
-                    default: return false;
-
-                }
-            }
-        });
+                });
     }
 
     /*@Override

@@ -20,10 +20,7 @@ public class ActionBookmark extends Fragment {
     public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                               @Nullable Bundle savedInstanceState) {
 
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_action_bookmark, container,false);
-
-
-
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_bookmark, container,false);
         return viewGroup;
     }
 }

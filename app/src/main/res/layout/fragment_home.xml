@@ -483,31 +483,6 @@
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textviewUserEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="16dp"
-                android:text="" />
-
-            <Button
-                android:background="#5200BCD4"
-                android:id="@+id/buttonLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="로그아웃" />
-
-            <TextView
-                android:id="@+id/textviewDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="16dp"
-                android:text="회원탈퇴 합니다."
-                android:textColor="@color/colorAccent" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

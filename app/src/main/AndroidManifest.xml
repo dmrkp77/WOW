@@ -18,7 +18,7 @@
         <activity android:name="com.mobile.fm.exerciseboard.ExerciseActivity" />
         <activity android:name="com.mobile.fm.login.FindActivity" />
         <activity android:name="com.mobile.fm.main.ContentActivity" />
-        <activity android:name="com.mobile.fm.login.MainActivity" />
+        <activity android:name="com.mobile.fm.login.SignUpActivity" />
         <activity android:name="com.mobile.fm.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

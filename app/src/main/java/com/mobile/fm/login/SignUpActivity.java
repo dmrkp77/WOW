@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.mobile.fm.main.ContentActivity;
 import com.mobile.fm.R;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     //define view objects
     EditText editTextEmail;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_singup);
 
         //initializig firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
                         } else {
                             //에러발생시
-                            Toast.makeText(MainActivity.this, "등록에러\n - 이미 등록된 이메일  \n - 암호 최소 6자리 이상 \n - 서버에러", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "등록에러\n - 이미 등록된 이메일  \n - 암호 최소 6자리 이상 \n - 서버에러", Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
                     }

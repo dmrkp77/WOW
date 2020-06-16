@@ -21,7 +21,7 @@ public class ActionSearch extends Fragment {
     public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                               @Nullable Bundle savedInstanceState) {
 
-        viewGroup = (ViewGroup) inflater.inflate(R.layout.activity_action_search, container,false);
+        viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_search, container,false);
         return viewGroup;
     }
 }
