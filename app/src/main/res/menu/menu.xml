@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:checked="true"
+        android:icon="@drawable/ic_home"
+        android:title="메인메뉴"/>
+
+    <item
+        android:id="@+id/action_search"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:checked="true"
+        android:icon="@drawable/ic_search"
+        android:title="검색"/>
+
+    <item
+        android:id="@+id/action_bookmark"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:checked="true"
+        android:icon="@drawable/ic_star_boarder"
+        android:title="즐겨찾기"/>
+
+    <item
+        android:id="@+id/action_user"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:checked="true"
+        android:icon="@drawable/ic_user"
+        android:title="사용자 정보"/>
+</menu>

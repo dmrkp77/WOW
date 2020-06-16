@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.MusicActivity"></activity>
+        <activity android:name=".main.ActionBookmark"></activity>
+        <activity android:name=".main.ActionUser" />
+        <activity android:name=".main.ActionSearch" />
+        <activity android:name=".main.ActionHome" />
+        <activity android:name=".main.MusicActivity" />
         <activity android:name=".login.FindActivity" />
         <activity android:name=".main.ContentActivity" />
         <activity android:name=".login.MainActivity" />
