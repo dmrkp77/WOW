@@ -13,8 +13,6 @@
         <activity android:name=".FindActivity" />
         <activity android:name=".ContentActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".menu.SportsActivity" />
-        <activity android:name=".menu.WritePostActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

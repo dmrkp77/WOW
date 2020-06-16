@@ -1,14 +1,16 @@
-package com.wah.login;
+package com.wah.login.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MusicActivity extends AppCompatActivity {
+import com.wah.login.R;
+
+public class ActionSearch extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_music);
+        setContentView(R.layout.activity_action_search);
     }
 }
