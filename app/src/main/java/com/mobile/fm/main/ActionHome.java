@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mobile.fm.R;
+import com.mobile.fm.exerciseboard.ExerciseActivity;
 import com.mobile.fm.login.LoginActivity;
 import com.mobile.fm.login.MainActivity;
 
@@ -113,7 +114,7 @@ public class ActionHome extends Fragment implements View.OnClickListener {
             startActivity(new Intent(getContext(), MusicActivity.class));
         }
         if (view == exercisebtn) {
-            startActivity(new Intent(getContext(), SportsActivity.class));
+            startActivity(new Intent(getContext(), ExerciseActivity.class));
         }
         if (view == tvbtn) {
             startActivity(new Intent(getContext(), MusicActivity.class));

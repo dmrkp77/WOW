@@ -1,18 +1,25 @@
 package com.mobile.fm.exerciseboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.mobile.fm.R;
 
 import java.util.ArrayList;
@@ -24,42 +31,52 @@ public class ExerciseActivity extends AppCompatActivity {
     private ArrayList<User> arrayList;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
-
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
+        findViewById(R.id.addTextBtn2).setOnClickListener(onClickListener);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);//리사이클러뷰 성능강화
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        arrayList = new ArrayList<>();// 유저를 담을 어레이리스트(어댑터쪽으로 날림)
+        arrayList = new ArrayList<User>();// 유저를 담을 어레이리스트(어댑터쪽으로 날림)
 
-        database = FirebaseDatabase.getInstance();//파이어베이스 연동
-        databaseReference = database.getReference("User");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //파이어베이스 데이터베이스의 데이터를 받아오는 곳
-                arrayList.clear();//기존 배열리스트 초기화
-                for(DataSnapshot snapshot :dataSnapshot.getChildren()){//반복문으로 데이터 list추출
-                    User user = snapshot.getValue(User.class); // 만들어뒀던 User객체에 데이터를 담는다.
-                    arrayList.add(user); // 배열리스트에 추가 리사이클러뷰에 보낼 준비
-                }
-                adapter.notifyDataSetChanged();//리스트 저장 및 새로고침
+        db.collection("posts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("check", document.getId() + " => " + document.getData());
+                                arrayList.add(new User(document.getData().get("title").toString(),document.getData().get("content").toString(),
+                                        "시간",document.getData().get("userName").toString(),1));
+                            }
+                        } else {
+                            Log.w("check", "Error getting documents.", task.getException());
+                        }
+                        adapter = new CustomAdapter(arrayList, getApplicationContext());
+                        recyclerView.setAdapter(adapter); //리사이클러뷰에 어댑터 연결
+                    }
+                });
+    }
+
+    View.OnClickListener onClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.addTextBtn2:
+                    myStartActivity(WritePostActivity.class);
+                    break;
             }
+        }
+    };
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 데이터베이스를 가지고 오던중 오류발생
-                Log.e("MainActivity", String.valueOf(databaseError.toException()));//에러문 출력
-            }
-        });
-        adapter = new CustomAdapter(arrayList, this);
-        recyclerView.setAdapter(adapter); //리사이클러뷰에 어댑터 연결
-
-
+    private void myStartActivity(Class c){
+        Intent intent=new Intent(this,c);
+        startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package com.mobile.fm.main;
+package com.mobile.fm.exerciseboard;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -16,10 +16,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mobile.fm.R;
-import com.mobile.fm.WriteInfo;
 
 public class WritePostActivity extends AppCompatActivity {
-    private FirebaseUser user;
+    private FirebaseUser fuser;
     private static final String TAG="WritePost Activity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +41,22 @@ public class WritePostActivity extends AppCompatActivity {
 
     private void postUpload(){
         final String title=((EditText) findViewById(R.id.titleEditText)).getText().toString();
-        final String contents=((EditText) findViewById(R.id.contentEditText)).getText().toString();
+        final String content=((EditText) findViewById(R.id.contentEditText)).getText().toString();
 
-        if(title.length()>0&&contents.length()>0){
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            WriteInfo writeInfo=new WriteInfo(title,contents,user.getUid());
-            uploader(writeInfo);
+        if(title.length()>0&&content.length()>0){
+            fuser = FirebaseAuth.getInstance().getCurrentUser();
+            User user=new User(title,content,null,fuser.getUid(),0);
+            uploader(user);
         }
     }
-    private void uploader(WriteInfo writeInfo){
+    private void uploader(User user){
         FirebaseFirestore db=FirebaseFirestore.getInstance();
-        db.collection("posts").add(writeInfo)
+        db.collection("posts").add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG,"글이 게시되었습니다.");
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

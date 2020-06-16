@@ -7,7 +7,13 @@ public class User {
     private String userName;
     private int commentNumber;
 
-    public User(){}
+    public User(String title, String content, String time, String userName, int commentNumber) {
+        this.title = title;
+        this.content = content;
+        this.time = time;
+        this.userName = userName;
+        this.commentNumber = commentNumber;
+    }
 
     public String getTitle() {
         return title;
