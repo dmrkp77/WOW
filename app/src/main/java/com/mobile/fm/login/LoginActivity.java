@@ -2,12 +2,14 @@ package com.mobile.fm.login;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,24 +24,27 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mobile.fm.BackPressHandler;
+import com.mobile.fm.PreferenceManager;
 import com.mobile.fm.main.ContentActivity;
 import com.mobile.fm.R;
 import com.mobile.fm.exerciseboard.WritePostActivity;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
     //define view objects
 
     private BackPressHandler backPressHandler = new BackPressHandler(this);
 
-    EditText editTextEmail;
-    EditText editTextPassword;
-    Button buttonSignin;
-    TextView textviewSingin;
-    TextView textviewMessage;
-    TextView textviewFindPassword;
-    ProgressDialog progressDialog;
+//    String id, pw;
+    private CheckBox saveIdPassword;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+    private Button buttonSignin;
+    private TextView textviewSingin;
+    private TextView textviewMessage;
+    private TextView textviewFindPassword;
+    private ProgressDialog progressDialog;
     //define firebase object
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //initializig firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if(firebaseAuth.getCurrentUser() != null){
+        if (firebaseAuth.getCurrentUser() != null) {
             //이미 로그인 되었다면 이 액티비티를 종료함
             finish();
             //그리고 원하는 액티비티를 연다.
@@ -57,25 +62,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         //initializing views
+        saveIdPassword = (CheckBox) findViewById(R.id.saveIdPassword);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        textviewSingin= (TextView) findViewById(R.id.textViewSignin);
+        textviewSingin = (TextView) findViewById(R.id.textViewSignin);
         textviewMessage = (TextView) findViewById(R.id.textviewMessage);
         textviewFindPassword = (TextView) findViewById(R.id.textViewFindpassword);
         buttonSignin = (Button) findViewById(R.id.buttonSignup);
         progressDialog = new ProgressDialog(this);
 
+
+        boolean boo = PreferenceManager.getBoolean(this, "check");
+        if (boo) {
+            // 체크가 되어있다면 아래 코드를 수행
+            // 저장된 아이디와 암호를 가져와 셋팅한다.
+            editTextEmail.setText(PreferenceManager.getString(this, "id"));
+            editTextPassword.setText(PreferenceManager.getString(this, "pw"));
+            saveIdPassword.setChecked(true); //체크박스는 여전히 체크 표시 하도록 셋팅
+        } else {
+            editTextEmail.setText(PreferenceManager.getString(this, "id"));
+        }
+
         //button click event
-        buttonSignin.setOnClickListener(this);
-        textviewSingin.setOnClickListener(this);
-        textviewFindPassword.setOnClickListener(this);
+        buttonSignin.setOnClickListener(listener);
+        textviewSingin.setOnClickListener(listener);
+        textviewFindPassword.setOnClickListener(listener);
+        saveIdPassword.setOnClickListener(checklistener);
     }
 
     //firebase userLogin method
-    private void userLogin(){
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+    private void userLogin() {
+        PreferenceManager.setString(this, "id", editTextEmail.getText().toString().trim()); //id라는 키값으로 저장
+        PreferenceManager.setString(this, "pw", editTextPassword.getText().toString().trim()); //pw라는 키값으로 저장
 
+//        String email = editTextEmail.getText().toString().trim();
+//        String password = editTextPassword.getText().toString().trim();
+
+        // 저장한 키 값으로 저장된 아이디와 암호를 불러와 String 값에 저장
+        String checkId = PreferenceManager.getString(this, "id");
+        String checkPw = PreferenceManager.getString(this, "pw");
 
 
         if (ContextCompat.checkSelfPermission(LoginActivity.this,
@@ -94,15 +119,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ActivityCompat.requestPermissions(LoginActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         1);
-
             }
         }
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(checkId)) {
             Toast.makeText(this, "email을 입력해 주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if(TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(checkPw)) {
             Toast.makeText(this, "password를 입력해 주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -111,12 +135,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.show();
 
         //logging in the user
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+        firebaseAuth.signInWithEmailAndPassword(checkId, checkPw)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             finish();
                             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
                         } else {
@@ -128,46 +152,63 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-
-
-    private void startToast(String msg){
-        Toast.makeText(this, msg,Toast.LENGTH_SHORT).show();
+    //사용자 권한 허용 알림창
+    private void startToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case 1: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 } else {
-
                     startToast("권한을 허용해주세요");
                 }
-
             }
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        if(view == buttonSignin) {
-            userLogin();
+    //클릭이벤트 구현(CheckBox차원)
+    CheckBox.OnClickListener checklistener = new CheckBox.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (((CheckBox) view).isChecked()) { // 체크박스 체크 되어 있으면
+                // editText에서 아이디와 암호 가져와 PreferenceManager에 저장한다.
+                PreferenceManager.setString(getApplicationContext(), "id", editTextEmail.getText().toString()); //id 키값으로 저장
+                PreferenceManager.setString(getApplicationContext(), "pw", editTextPassword.getText().toString()); //pw 키값으로 저장
+                PreferenceManager.setBoolean(getApplicationContext(), "check", saveIdPassword.isChecked()); //현재 체크박스 상태 값 저장
+            } else { //체크박스가 해제되어있으면
+                PreferenceManager.setBoolean(getApplicationContext(), "check", saveIdPassword.isChecked()); //현재 체크박스 상태 값 저장
+                PreferenceManager.setString(getApplicationContext(), "id", editTextEmail.getText().toString()); //id 키값으로 저장
+            }
         }
-        if(view == textviewSingin) {
-            finish();
-            startActivity(new Intent(this, SignUpActivity.class));
-        }
-        if(view == textviewFindPassword) {
-            finish();
-            startActivity(new Intent(this, FindActivity.class));
-        }
-    }
+    };
 
+    //클릭이벤트 구현(View차원)
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == buttonSignin) {
+                userLogin();
+            }
+            if (view == textviewSingin) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
+            }
+            if (view == textviewFindPassword) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), FindActivity.class));
+            }
+        }
+    };
+
+    //뒤로가기 2번클릭 앱종료 기능 구현
     @Override
     public void onBackPressed() {
-
         // Toast 메세지 사용자 지정
         backPressHandler.onBackPressed("뒤로가기 버튼 한번 더 누르면 종료");
     }
-
-
 }
+
+// 출처: https://yonoo88.tistory.com/1360 [yonoo's]
