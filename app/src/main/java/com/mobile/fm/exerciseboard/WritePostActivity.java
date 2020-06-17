@@ -43,11 +43,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class WritePostActivity extends AppCompatActivity {
-    private FirebaseUser user;
+    private FirebaseUser fuser;
     private static final String TAG="WritePost Activity";
     private ArrayList<String> pathList= new ArrayList<>();
     private LinearLayout parent;
@@ -179,7 +180,7 @@ public class WritePostActivity extends AppCompatActivity {
         if(title.length()>0){
             final ArrayList<String> contentsList= new ArrayList<>();
 
-            user = FirebaseAuth.getInstance().getCurrentUser();
+            fuser = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseStorage storage=FirebaseStorage.getInstance();
             StorageReference storageRef= storage.getReference();
 
@@ -194,7 +195,7 @@ public class WritePostActivity extends AppCompatActivity {
                         contentsList.add(pathList.get(pathCount));
 
                         //user=FirebaseAuth.getInstance().getCurrentUser();
-                        final StorageReference mountainImagesRef = storageRef.child("users/"+user.getUid()+"/"+pathCount+".jpg");
+                        final StorageReference mountainImagesRef = storageRef.child("users/"+fuser.getUid()+"/"+pathCount+".jpg");
 
                         try{
                             InputStream stream= new FileInputStream(new File(pathList.get(pathCount)));
@@ -217,10 +218,14 @@ public class WritePostActivity extends AppCompatActivity {
                                             Log.d("로그",""+uri);
                                             contentsList.set(index,uri.toString());
                                             successCount++;
+                                            long now = System.currentTimeMillis();
+                                            Date mDate = new Date(now);
+                                            SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                            String getTime = simpleDate.format(mDate);
                                             if(pathList.size()==successCount){
                                                 //사진,동영상 업로드 완료
-                                                WriteInfo writeInfo=new WriteInfo(title,contentsList, user.getUid(),new Date());
-                                                uploader(writeInfo);
+                                                Post post = new Post(fuser.getUid(),fuser.getEmail(),title,contentsList, getTime);
+                                                uploader(post);
 
                                             }
                                         }
@@ -238,9 +243,9 @@ public class WritePostActivity extends AppCompatActivity {
 
         }
     }
-    private void uploader(WriteInfo writeInfo){
+    private void uploader(Post post){
         FirebaseFirestore db=FirebaseFirestore.getInstance();
-        db.collection("posts").add(writeInfo)
+        db.collection("posts").add(post)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {

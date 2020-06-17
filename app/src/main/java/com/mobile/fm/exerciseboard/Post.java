@@ -2,6 +2,7 @@ package com.mobile.fm.exerciseboard;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ public class Post {
     public String uid;
     public String author;
     public String title;
-    public String body;
+    public ArrayList<String> body;
     private String createdAt;
     public int starCount = 0;
     public int commentCount = 0;
@@ -18,7 +19,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String uid, String author, String title, String body,String createdAt) {
+    public Post(String uid, String author, String title,ArrayList<String> body,String createdAt) {
         this.uid = uid;
         this.author = author;
         this.title = title;
@@ -50,11 +51,11 @@ public class Post {
         this.title = title;
     }
 
-    public String getBody() {
+    public ArrayList <String> getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBody(ArrayList<String> body) {
         this.body = body;
     }
 

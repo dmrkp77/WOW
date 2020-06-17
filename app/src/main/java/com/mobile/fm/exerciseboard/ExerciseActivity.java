@@ -12,11 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,8 +30,7 @@ public class ExerciseActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Post> arrayList;
-    private FirebaseDatabase database;
-    private DatabaseReference databaseReference;
+    private ArrayList<String> arrayList1;
     private CollectionReference postsRef;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
@@ -51,7 +45,7 @@ public class ExerciseActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<Post>();// 유저를 담을 어레이리스트(어댑터쪽으로 날림)
-
+        arrayList1 = new ArrayList<String>();
         Query a = postsRef.orderBy("createdAt", Query.Direction.DESCENDING);
         a.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -65,8 +59,10 @@ public class ExerciseActivity extends AppCompatActivity {
                                     if(str.charAt(i)==' ')break;
                                     str1+=str.charAt(i);
                                 }
-                                arrayList.add(new Post(document.getData().get("uid").toString(),document.getData().get("author").toString(),document.getData().get("title").toString(),document.getData().get("body").toString(),str1));
+                                arrayList1.add(document.getData().get("body").toString());
+                                arrayList.add(new Post(document.getData().get("uid").toString(),document.getData().get("author").toString(),document.getData().get("title").toString(), arrayList1,str1));
                             }
+
                         } else {
                             Log.w("check", "Error getting documents.", task.getException());
                         }
