@@ -45,7 +45,6 @@ public class ExerciseActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<Post>();// 유저를 담을 어레이리스트(어댑터쪽으로 날림)
-        arrayList1 = new ArrayList<String>();
         Query a = postsRef.orderBy("createdAt", Query.Direction.DESCENDING);
         a.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -59,7 +58,7 @@ public class ExerciseActivity extends AppCompatActivity {
                                     if(str.charAt(i)==' ')break;
                                     str1+=str.charAt(i);
                                 }
-                                arrayList1.add(document.getData().get("body").toString());
+                                ArrayList<String> arrayList1 = (ArrayList<String>) document.getData().get("body");
                                 arrayList.add(new Post(document.getData().get("uid").toString(),document.getData().get("author").toString(),document.getData().get("title").toString(), arrayList1,str1));
                             }
 

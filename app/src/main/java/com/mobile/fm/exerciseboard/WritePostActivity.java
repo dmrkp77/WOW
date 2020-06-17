@@ -21,11 +21,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -35,8 +32,6 @@ import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.mobile.fm.R;
-import com.mobile.fm.WriteInfo;
-import com.mobile.fm.login.LoginActivity;
 import com.mobile.fm.main.GalleryActivity;
 
 import java.io.File;
@@ -90,8 +85,6 @@ public class WritePostActivity extends AppCompatActivity {
                     editText.setLayoutParams(layoutParams);
                     editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE| InputType.TYPE_CLASS_TEXT);
                     parent.addView(editText);
-
-
                 }
 
                 break;
@@ -101,7 +94,7 @@ public class WritePostActivity extends AppCompatActivity {
     }
 
 
-        View.OnClickListener onClickListener=new View.OnClickListener() {
+    View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
@@ -136,8 +129,8 @@ public class WritePostActivity extends AppCompatActivity {
                         if (ActivityCompat.shouldShowRequestPermissionRationale(WritePostActivity.this,
                                 Manifest.permission.READ_EXTERNAL_STORAGE)) {
                             ActivityCompat.requestPermissions(WritePostActivity.this,
-                                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                1);
+                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                    1);
                         } else {
 
 
@@ -147,7 +140,6 @@ public class WritePostActivity extends AppCompatActivity {
                         myStartActivity(GalleryActivity.class,"video");
                     }
                     break;
-
             }
         }
     };
@@ -165,7 +157,7 @@ public class WritePostActivity extends AppCompatActivity {
             }
         }
     }
-//    private void postUpload(){
+    //    private void postUpload(){
 //        final String title=((EditText) findViewById(R.id.titleEditText)).getText().toString();
 //        final String content=((EditText) findViewById(R.id.contentEditText)).getText().toString();
 //        if(title.length()>0&&content.length()>0){
@@ -226,7 +218,6 @@ public class WritePostActivity extends AppCompatActivity {
                                                 //사진,동영상 업로드 완료
                                                 Post post = new Post(fuser.getUid(),fuser.getEmail(),title,contentsList, getTime);
                                                 uploader(post);
-
                                             }
                                         }
                                     });
