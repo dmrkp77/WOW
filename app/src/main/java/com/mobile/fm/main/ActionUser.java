@@ -47,6 +47,11 @@ public class ActionUser extends Fragment {
         buttonLogout.setOnClickListener(listener);
         textivewDelete.setOnClickListener(listener);
 
+
+        //textViewUserEmail의 내용을 변경해 준다.
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        textViewUserEmail.setText(user.getEmail());
+
         return viewGroup;
     }
 
@@ -56,9 +61,25 @@ public class ActionUser extends Fragment {
 
             //로그아웃 클릭 시 로그아웃
             if(view == buttonLogout){
-                Intent intent = new Intent(getContext(),ContentActivity.class);
-                intent.putExtra("로그아웃",true);
-                startActivity(intent);
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(getContext());
+                alert_confirm.setMessage("로그아웃 하시겠습니까?").setCancelable(false).
+                        setPositiveButton("네", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getContext(),ContentActivity.class);
+                                intent.putExtra("로그아웃",true);
+                                Toast.makeText(getContext(),"로그아웃 하였습니다.", Toast.LENGTH_LONG).show();
+                                startActivity(intent);
+                            }
+                        });
+
+               alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        Toast.makeText(getContext(), "취소", Toast.LENGTH_LONG).show();
+                    }
+                });
+                alert_confirm.show();
             }
 
             //계정삭제 버튼 추가
@@ -80,8 +101,7 @@ public class ActionUser extends Fragment {
                                             }
                                         });
                             }
-                        }
-                );
+                        });
 
                 alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
