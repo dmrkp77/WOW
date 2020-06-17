@@ -29,6 +29,7 @@ public class MusicListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomAdapterForBarMusic adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<Long> musicNumList;
     private ArrayList<Music> arrayList;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
@@ -62,21 +63,21 @@ public class MusicListActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         arrayList =new ArrayList<>();
+        musicNumList = new ArrayList<>();
 
 
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("Today"); //데이터 베이스 생성 필요
+        databaseReference = database.getReference(name); //데이터 베이스 생성 필요
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //파이어 베이스  db를 받아오는 곳.
-                arrayList.clear();  //기존 배열 초기화, 방지차원.
+                musicNumList.clear();  //기존 배열 초기화, 방지차원.
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){//반복문으로 데이터 list를 추출해냄
-                    Music music =snapshot.getValue(Music.class); // 만들어 뒀떤 Music 객체에  데이터를 담음.
-                    arrayList.add(music);   //담은 데이터를 배열리스트ㅔ 넣고 리사이클 뷰로 보낼 준비
+                    Long num =snapshot.getValue(Long.TYPE); // 만들어 뒀떤 Music 객체에  데이터를 담음.
+                    musicNumList.add(num);   //담은 데이터를 배열리스트ㅔ 넣고 리사이클 뷰로 보낼 준비
                 }
-
-                adapter.notifyDataSetChanged();//   리스트 저장 및  새롴고침
+                //adapter.notifyDataSetChanged();//   리스트 저장 및  새롴고침
             }
 
             @Override
@@ -85,6 +86,26 @@ public class MusicListActivity extends AppCompatActivity {
                 Log.e("MainActivity", String.valueOf(databaseError.toException()));
             }
         });
+        databaseReference = database.getReference("Music");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList.clear();
+                //dataSnapshot 여기에 Music에 대한 데이터들이 전부 들어 있다. 그 데이터들은 DataSnapshot 형식임.
+                for(Long test : musicNumList){
+                    System.out.println("값"+test);
+                    arrayList.add(dataSnapshot.child(Integer.toString(test.intValue())).getValue(Music.class));
+                }
+                adapter.notifyDataSetChanged();//   리스트 저장 및  새롴고침
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //디비를 가져오던 중 에러 발생시.
+                Log.e("MusicActivity", String.valueOf(databaseError.toException()));
+            }
+        });
+        recyclerView.setAdapter(adapter);//리사이클러 뷰의 어댑터 연결
+
         adapter = new CustomAdapterForBarMusic(arrayList, this);
 
         adapter.setOnItemClickListener(new CustomAdapterForBarMusic.OnItemClickListener() {
