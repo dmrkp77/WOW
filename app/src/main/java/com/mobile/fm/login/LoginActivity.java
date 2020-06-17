@@ -1,7 +1,9 @@
 package com.mobile.fm.login;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.mobile.fm.BackPressHandler;
 import com.mobile.fm.main.ContentActivity;
 import com.mobile.fm.R;
+import com.mobile.fm.exerciseboard.WritePostActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     //define view objects
@@ -71,6 +76,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
+
+
+        if (ContextCompat.checkSelfPermission(LoginActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(LoginActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(LoginActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
+            } else {
+                ActivityCompat.requestPermissions(LoginActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
+
+            }
+        }
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this, "email을 입력해 주세요.", Toast.LENGTH_SHORT).show();
             return;
@@ -99,6 +125,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+    }
+
+
+
+
+    private void startToast(String msg){
+        Toast.makeText(this, msg,Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+
+                    startToast("권한을 허용해주세요");
+                }
+
+            }
+        }
     }
 
     @Override

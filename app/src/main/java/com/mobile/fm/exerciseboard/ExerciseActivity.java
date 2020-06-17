@@ -25,6 +25,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.core.OrderBy;
 import com.mobile.fm.R;
+import com.mobile.fm.exerciseboard.WritePostActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +43,7 @@ public class ExerciseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board);
+
         findViewById(R.id.addTextBtn2).setOnClickListener(onClickListener);
         postsRef=db.collection("posts");
         recyclerView = findViewById(R.id.recyclerView);
