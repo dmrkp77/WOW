@@ -16,10 +16,10 @@ import com.mobile.fm.R;
 import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
-    private ArrayList<User> arrayList;
+    private ArrayList<Post> arrayList;
     private Context context;
 
-    public CustomAdapter(ArrayList<User> arrayList, Context context) {
+    public CustomAdapter(ArrayList<Post> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -35,10 +35,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         holder.tv_title.setText(arrayList.get(position).getTitle());
-        holder.tv_content.setText(String.valueOf((arrayList.get(position).getContent())));
-        holder.tv_time.setText(arrayList.get(position).getTime());
-        holder.tv_userName.setText(arrayList.get(position).getUserName());
-        holder.tv_commentNumber.setText(String.valueOf((arrayList.get(position).getCommentNumber())));
+        holder.tv_content.setText(String.valueOf((arrayList.get(position).getBody())));
+        holder.tv_time.setText(arrayList.get(position).getCreatedAt());
+        holder.tv_userName.setText(arrayList.get(position).getAuthor());
+        holder.tv_commentNumber.setText(String.valueOf((arrayList.get(position).commentCount)));
     }
 
     @Override
