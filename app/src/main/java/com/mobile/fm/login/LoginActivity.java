@@ -17,11 +17,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mobile.fm.BackPressHandler;
 import com.mobile.fm.main.ContentActivity;
 import com.mobile.fm.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     //define view objects
+
+    private BackPressHandler backPressHandler = new BackPressHandler(this);
+
     EditText editTextEmail;
     EditText editTextPassword;
     Button buttonSignin;
@@ -97,8 +101,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-
-
     @Override
     public void onClick(View view) {
         if(view == buttonSignin) {
@@ -113,4 +115,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(this, FindActivity.class));
         }
     }
+
+    @Override
+    public void onBackPressed() {
+
+        // Toast 메세지 사용자 지정
+        backPressHandler.onBackPressed("뒤로가기 버튼 한번 더 누르면 종료");
+    }
+
+
 }

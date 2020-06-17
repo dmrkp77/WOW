@@ -46,8 +46,7 @@ public class ContentActivity extends AppCompatActivity {
 
         if (logout.equals(true)) {
             firebaseAuth.signOut();
-            intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, LoginActivity.class));
         }
 
     }
