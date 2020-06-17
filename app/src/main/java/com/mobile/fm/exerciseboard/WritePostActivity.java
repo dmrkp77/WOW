@@ -48,20 +48,19 @@ public class WritePostActivity extends AppCompatActivity {
     Date mDate = new Date(now);
     SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     String getTime = simpleDate.format(mDate);
-
     private void postUpload(){
         final String title=((EditText) findViewById(R.id.titleEditText)).getText().toString();
         final String content=((EditText) findViewById(R.id.contentEditText)).getText().toString();
         if(title.length()>0&&content.length()>0){
             fuser = FirebaseAuth.getInstance().getCurrentUser();
-            User user = new User(title,content,getTime,fuser.getEmail(),0);
-            uploader(user);
+            Post post = new Post(fuser.getUid(),fuser.getEmail(),title,content,getTime);
+            uploader(post);
         }
     }
-    private void uploader(User user){
+    private void uploader(Post post){
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         //db.collection("posts").add(user) 문서ID 임의로 설정
-        db.collection("posts").document(getTime).set(user)
+        db.collection("posts").document(getTime).set(post)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
