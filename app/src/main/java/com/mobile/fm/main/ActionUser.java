@@ -73,12 +73,9 @@ public class ActionUser extends Fragment {
                             }
                         });
 
-               alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
-                        Toast.makeText(getContext(), "취소", Toast.LENGTH_LONG).show();
-                    }
-                });
+                    public void onClick(DialogInterface dialogInterface, int which) { }});
                 alert_confirm.show();
             }
 
@@ -105,10 +102,7 @@ public class ActionUser extends Fragment {
 
                 alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getContext(), "취소", Toast.LENGTH_LONG).show();
-                    }
-                });
+                    public void onClick(DialogInterface dialogInterface, int i) { }});
                 alert_confirm.show();
             }
         }
