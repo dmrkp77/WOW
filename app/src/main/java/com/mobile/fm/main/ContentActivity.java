@@ -37,18 +37,24 @@ public class ContentActivity extends AppCompatActivity {
     private Button tvbtn;
     private Button moviebtn;*/
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        Intent intent = getIntent();
+//        Boolean logout = intent.getBooleanExtra("로그아웃", false);
+//
+//        if (logout.equals(true)) {
+//            firebaseAuth.signOut();
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
+//
+//    }
 
-        Intent intent = getIntent();
-        Boolean logout = intent.getBooleanExtra("로그아웃", false);
-
-        if (logout.equals(true)) {
-            firebaseAuth.signOut();
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-
+    public void Logout() {
+        firebaseAuth.signOut();
+        finish();
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     @Override
@@ -61,7 +67,7 @@ public class ContentActivity extends AppCompatActivity {
         actionBookmark = new ActionBookmark();
         actionHome = new ActionHome();
         actionSearch = new ActionSearch();
-        actionUser = new ActionUser();
+        actionUser = new ActionUser(this);
 
         //initializing views
        /* textViewUserEmail = (TextView) findViewById(R.id.textviewUserEmail);

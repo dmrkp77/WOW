@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,11 @@ import javax.annotation.Nullable;
 public class ActionUser extends Fragment {
     ViewGroup viewGroup;
 
+    ContentActivity activity;
+
+    public ActionUser(Context context) {
+        this.activity = (ContentActivity) context;
+    }
     //firebase auth object
     private FirebaseAuth firebaseAuth;
 
@@ -66,10 +72,11 @@ public class ActionUser extends Fragment {
                         setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getContext(),ContentActivity.class);
-                                intent.putExtra("로그아웃",true);
-                                Toast.makeText(getContext(),"로그아웃 하였습니다.", Toast.LENGTH_LONG).show();
-                                startActivity(intent);
+                                activity.Logout();
+//                                Intent intent = new Intent(getContext(),ContentActivity.class);
+//                                intent.putExtra("로그아웃",true);
+//                                Toast.makeText(getContext(),"로그아웃 하였습니다.", Toast.LENGTH_LONG).show();
+//                                startActivity(intent);
                             }
                         });
 
