@@ -27,7 +27,7 @@ import com.mobile.fm.BackPressHandler;
 import com.mobile.fm.PreferenceManager;
 import com.mobile.fm.main.ContentActivity;
 import com.mobile.fm.R;
-import com.mobile.fm.exerciseboard.WritePostActivity;
+import com.mobile.fm.exerciseboard.activity.WritePostActivity;
 
 public class LoginActivity extends AppCompatActivity {
     //define view objects

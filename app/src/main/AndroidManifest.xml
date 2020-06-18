@@ -16,12 +16,14 @@
         <activity android:name="com.mobile.fm.main.ActionHome" />-->
         <activity android:name="com.mobile.fm.music.MusicActivity" />
         <activity android:name="com.mobile.fm.music.MusicListActivity" />
-        <activity android:name="com.mobile.fm.exerciseboard.WritePostActivity" />
-        <activity android:name="com.mobile.fm.exerciseboard.ExerciseActivity" />
         <activity android:name="com.mobile.fm.login.FindActivity" />
         <activity android:name="com.mobile.fm.main.ContentActivity" />
-        <activity android:name="com.mobile.fm.main.GalleryActivity" />
         <activity android:name="com.mobile.fm.login.SignUpActivity" />
+        <activity android:name="com.mobile.fm.exerciseboard.activity.BasicActivity" />
+        <activity android:name="com.mobile.fm.exerciseboard.activity.GalleryActivity" />
+        <activity android:name="com.mobile.fm.exerciseboard.activity.MainActivity" />
+        <activity android:name="com.mobile.fm.exerciseboard.activity.PostActivity" />
+        <activity android:name="com.mobile.fm.exerciseboard.activity.WritePostActivity" />
         <activity android:name="com.mobile.fm.login.LoginActivity">
 
             <intent-filter>

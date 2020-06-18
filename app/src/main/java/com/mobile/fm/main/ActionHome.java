@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.mobile.fm.R;
-import com.mobile.fm.exerciseboard.ExerciseActivity;
+import com.mobile.fm.exerciseboard.activity.MainActivity;
 import com.mobile.fm.music.MusicActivity;
 
 import javax.annotation.Nullable;
@@ -64,7 +64,7 @@ public class ActionHome extends Fragment implements View.OnClickListener {
             startActivity(new Intent(getContext(), MusicActivity.class));
         }
         if (view == exercisebtn) {
-            startActivity(new Intent(getContext(), ExerciseActivity.class));
+            startActivity(new Intent(getContext(), MainActivity.class));
         }
         if (view == tvbtn) {
             startActivity(new Intent(getContext(), MusicActivity.class));
