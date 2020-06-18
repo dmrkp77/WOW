@@ -44,12 +44,13 @@ public class ActionSearch extends Fragment {
     private EditText editSearch;        // 검색어를 입력할 Input 창
     private SearchAdapter searchAdapter;      // 리스트뷰에 연결할 아답터
     private ArrayList<PostInfo> arraylist;
-    private ViewGroup viewGroup;
     private boolean updating;
     private boolean topScrolled;
+    private ArrayList<PostInfo> list;
+    ContentActivity activity;
 
-    public ActionSearch() {
-        // Required empty public constructor
+    public ActionSearch(Context context) {
+        this.activity = (ContentActivity) context;
     }
 
     @Override
@@ -64,12 +65,12 @@ public class ActionSearch extends Fragment {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         arraylist = new ArrayList<>();
+        list = new ArrayList<>();
         searchAdapter = new SearchAdapter(getActivity(), arraylist);
         searchAdapter.setOnPostListener(onPostListener);
-
         final RecyclerView recyclerView = view.findViewById(R.id.search_recyclerview);
 //        view.findViewById(R.id.floatingActionButton).setOnClickListener(onClickListener);
-
+        editSearch = view.findViewById(R.id.editSearch);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(searchAdapter);
@@ -112,7 +113,51 @@ public class ActionSearch extends Fragment {
 
         postsUpdate(false);
 
+        // input창에 검색어를 입력시 "addTextChangedListener" 이벤트 리스너를 정의한다.
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // input창에 문자를 입력할때마다 호출된다.
+                // search 메소드를 호출한다.
+                String text = editSearch.getText().toString();
+                search(text);
+            }
+        });
+
         return view;
+    }
+        // 검색을 수행하는 메소드
+    public void search(String charText) {
+
+        // 문자 입력시마다 리스트를 지우고 새로 뿌려준다.
+        arraylist.clear();
+
+        // 문자 입력이 없을때는 모든 데이터를 보여준다.
+        if (charText.length() == 0) {
+//            arraylist.addAll(list);
+        }
+        // 문자 입력을 할때..
+        else {
+            // 리스트의 모든 데이터를 검색한다.
+            for (int i = 0; i < list.size(); i++) {
+                // arraylist의 모든 데이터에 입력받은 단어(charText)가 포함되어 있으면 true를 반환한다.
+                if (list.get(i).getTitle().toLowerCase().contains(charText)) {
+                    // 검색된 데이터를 리스트에 추가한다.
+                    arraylist.add(list.get(i));
+                }
+            }
+        }
+        // 리스트 데이터가 변경되었으므로 아답터를 갱신하여 검색된 데이터를 화면에 보여준다.
+        searchAdapter.notifyDataSetChanged();
     }
     @Override
     public void onAttach(Context context) {
@@ -144,7 +189,7 @@ public class ActionSearch extends Fragment {
     };
     private void postsUpdate(final boolean clear) {
         updating = true;
-        Date date = arraylist.size() == 0 || clear ? new Date() : arraylist.get(arraylist.size() - 1).getCreatedAt();
+        Date date = list.size() == 0 || clear ? new Date() : list.get(list.size() - 1).getCreatedAt();
         CollectionReference collectionReference = firebaseFirestore.collection("posts");
         collectionReference.orderBy("createdAt", Query.Direction.DESCENDING).whereLessThan("createdAt", date).limit(10).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -152,11 +197,11 @@ public class ActionSearch extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             if(clear){
-                                arraylist.clear();
+                                list.clear();
                             }
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("so", document.getId() + " => " + document.getData());
-                                arraylist.add(new PostInfo(
+                                list.add(new PostInfo(
                                         document.getData().get("title").toString(),
                                         (ArrayList<String>) document.getData().get("contents"),
                                         (ArrayList<String>) document.getData().get("formats"),
@@ -164,7 +209,6 @@ public class ActionSearch extends Fragment {
                                         new Date(document.getDate("createdAt").getTime()),
                                         document.getId()));
                             }
-                            searchAdapter.notifyDataSetChanged();
                         } else {
                             Log.d("so", "Error getting documents: ", task.getException());
                         }
