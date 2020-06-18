@@ -1,4 +1,4 @@
-package com.mobile.fm.exerciseboard;
+package com.mobile.fm;
 
 public class Comment {
     public String uid;

@@ -31,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.mobile.fm.Post;
 import com.mobile.fm.R;
 import com.mobile.fm.main.GalleryActivity;
 
@@ -92,7 +93,6 @@ public class WritePostActivity extends AppCompatActivity {
 
         }
     }
-
 
     View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
@@ -186,7 +186,7 @@ public class WritePostActivity extends AppCompatActivity {
                     }else{
                         contentsList.add(pathList.get(pathCount));
 
-                        //user=FirebaseAuth.getInstance().getCurrentUser();
+                        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         final StorageReference mountainImagesRef = storageRef.child("users/"+fuser.getUid()+"/"+pathCount+".jpg");
 
                         try{
@@ -264,21 +264,6 @@ public class WritePostActivity extends AppCompatActivity {
         startActivityForResult(intent,0);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

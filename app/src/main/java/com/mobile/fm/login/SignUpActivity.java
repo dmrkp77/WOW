@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,9 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.mobile.fm.User;
 import com.mobile.fm.main.ContentActivity;
 import com.mobile.fm.R;
 
@@ -25,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     //define view objects
     EditText editTextEmail;
     EditText editTextPassword;
+    EditText editTextUsername;
     Button buttonSignup;
     TextView textviewSingin;
     TextView textviewMessage;
@@ -49,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextUsername = (EditText)findViewById(R.id.editTextUserName);
         textviewSingin = (TextView) findViewById(R.id.textViewSignin);
         textviewMessage = (TextView) findViewById(R.id.textviewMessage);
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
@@ -64,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //사용자가 입력하는 email, password를 가져온다.
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        String username = editTextUsername.getText().toString().trim();
         //email과 password가 비었는지 아닌지를 체크 한다.
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Email을 입력해 주세요.", Toast.LENGTH_SHORT).show();
@@ -72,7 +81,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Password를 입력해 주세요.", Toast.LENGTH_SHORT).show();
         }
-
+        if (TextUtils.isEmpty(username)) {
+            Toast.makeText(this, "Username를 입력해 주세요.", Toast.LENGTH_SHORT).show();
+        }
         //email과 password가 제대로 입력되어 있다면 계속 진행된다.
         progressDialog.setMessage("등록중입니다. 기다려 주세요...");
         progressDialog.show();
@@ -93,6 +104,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
 
+        User user = new User(username,email,password,null);
+        FirebaseFirestore db=FirebaseFirestore.getInstance();
+        db.collection("User").document(username).set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>(){
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
     }
 
     //button click event
