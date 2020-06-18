@@ -6,12 +6,14 @@ public class User {
     public String username;
     public String email;
     public String password;
+    public String uid;
     public ArrayList<String> bookmark;
 
-    public User(String username, String email, String password,ArrayList<String> bookmark) {
+    public User(String username, String email, String password,String uid,ArrayList<String> bookmark) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.uid = uid;
         this.bookmark=bookmark;
     }
     public String getUsername() {
@@ -37,4 +39,12 @@ public class User {
     public ArrayList<String> getBookmark() { return bookmark; }
 
     public void setBookmark(ArrayList<String> bookmark) { this.bookmark = bookmark; }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 }

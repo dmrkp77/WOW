@@ -20,6 +20,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mobile.fm.User;
@@ -38,6 +42,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     ProgressDialog progressDialog;
     //define firebase object
     FirebaseAuth firebaseAuth;
+    private DatabaseReference mDatabase;
+    private FirebaseUser firebaseUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +102,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             finish();
+
+                            String email = editTextEmail.getText().toString().trim();
+                            String password = editTextPassword.getText().toString().trim();
+                            String username = editTextUsername.getText().toString().trim();
+                            firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            User user = new User(username,email,password,firebaseUser.getUid(),null);
+                            FirebaseFirestore db=FirebaseFirestore.getInstance();
+                            db.collection("User").document(username).set(user)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>(){
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                        }
+                                    });
                             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
                         } else {
                             //에러발생시
@@ -104,19 +129,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     }
                 });
 
-        User user = new User(username,email,password,null);
-        FirebaseFirestore db=FirebaseFirestore.getInstance();
-        db.collection("User").document(username).set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>(){
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                    }
-                });
+
     }
 
     //button click event
@@ -125,6 +138,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (view == buttonSignup) {
             //TODO
             registerUser();
+
         }
 
         if (view == textviewSingin) {
