@@ -67,7 +67,7 @@ public class ContentActivity extends AppCompatActivity {
         //making fragment
         actionBookmark = new ActionBookmark();
         actionHome = new ActionHome();
-        actionSearch = new ActionSearch(this);
+        actionSearch = new ActionSearch();
         actionUser = new ActionUser(this);
 
         //initializing views

@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobile.fm">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,24 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--        <activity android:name="com.mobile.fm.main.ActionBookmark"></activity>-->
-<!--        <activity android:name="com.mobile.fm.main.ActionUser" />-->
-<!--        <activity android:name="com.mobile.fm.main.ActionSearch" />-->
-<!--        <activity android:name="com.mobile.fm.main.ActionHome" />-->
-        <activity android:name="com.mobile.fm.music.MusicActivity" />
-        <activity android:name="com.mobile.fm.music.MusicListActivity" />
-        <activity android:name="com.mobile.fm.login.FindActivity" />
-        <activity android:name="com.mobile.fm.main.ContentActivity" />
-        <activity android:name="com.mobile.fm.login.SignUpActivity" />
-        <activity android:name="com.mobile.fm.exerciseboard.activity.BasicActivity" />
-        <activity android:name="com.mobile.fm.exerciseboard.activity.GalleryActivity" />
-        <activity android:name="com.mobile.fm.exerciseboard.activity.MainActivity" />
-        <activity android:name="com.mobile.fm.exerciseboard.activity.PostActivity" />
-        <activity android:name="com.mobile.fm.exerciseboard.activity.WritePostActivity" />
-        <activity android:name="com.mobile.fm.main.UserInfoActivity"/>
-        <activity android:name="com.mobile.fm.login.LoginActivity">
+        <activity android:name=".main.search.SearchPostActivity"></activity>
+        <!-- <activity android:name="com.mobile.fm.main.ActionBookmark"></activity> -->
+        <!-- <activity android:name="com.mobile.fm.main.ActionUser" /> -->
+        <!-- <activity android:name="com.mobile.fm.main.ActionSearch" /> -->
+        <!-- <activity android:name="com.mobile.fm.main.ActionHome" /> -->
+        <activity android:name=".music.MusicActivity" />
+        <activity android:name=".music.MusicListActivity" />
+        <activity android:name=".login.FindActivity" />
+        <activity android:name=".main.ContentActivity" />
+        <activity android:name=".login.SignUpActivity" />
+        <activity android:name=".exerciseboard.activity.BasicActivity" />
+        <activity android:name=".exerciseboard.activity.GalleryActivity" />
+        <activity android:name=".exerciseboard.activity.MainActivity" />
+        <activity android:name=".exerciseboard.activity.PostActivity" />
+        <activity android:name=".exerciseboard.activity.WritePostActivity" />
+        <activity android:name=".main.UserInfoActivity" />
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
