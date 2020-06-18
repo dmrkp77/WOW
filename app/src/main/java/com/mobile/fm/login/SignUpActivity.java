@@ -115,11 +115,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             String username = editTextUsername.getText().toString().trim();
                             firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-                            long now = System.currentTimeMillis();
-                            Date date = new Date(now);
-                            SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy.MM.dd    HH:MM:ss");
+//                            final Date date =  !postInfo == null ? new Date() : postInfo.getCreatedAt();
+//                            long now = System.currentTimeMillis();
+//                            Date date = new Date(now);
+                            final Date date = new Date();
+                            SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy.MM.dd    HH:mm:ss");
                             String formatDate = sdfNow.format(date);
-
 
                             User user = new User(formatDate,username,email,password,firebaseUser.getUid(),null);
                             FirebaseFirestore db=FirebaseFirestore.getInstance();
