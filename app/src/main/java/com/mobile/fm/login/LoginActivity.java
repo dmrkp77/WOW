@@ -61,8 +61,9 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), ContentActivity.class)); //추가해 줄 Activity
         }
 
-        //initializing views
+        //initializing checkbox
         saveIdPassword = (CheckBox) findViewById(R.id.saveIdPassword);
+        //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textviewSingin = (TextView) findViewById(R.id.textViewSignin);
@@ -72,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
 
+        //checkbox상태에 따른 수행내용
         boolean boo = PreferenceManager.getBoolean(this, "check");
         if (boo) {
             // 체크가 되어있다면 아래 코드를 수행
@@ -107,20 +109,18 @@ public class LoginActivity extends AppCompatActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(LoginActivity.this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    1);
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 ActivityCompat.requestPermissions(LoginActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1);
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
             } else {
                 ActivityCompat.requestPermissions(LoginActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1);
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
             }
         }
+
         if (TextUtils.isEmpty(checkId)) {
             Toast.makeText(this, "email을 입력해 주세요.", Toast.LENGTH_SHORT).show();
             return;
@@ -193,11 +193,9 @@ public class LoginActivity extends AppCompatActivity {
                 userLogin();
             }
             if (view == textviewSingin) {
-                finish();
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
             }
             if (view == textviewFindPassword) {
-                finish();
                 startActivity(new Intent(getApplicationContext(), FindActivity.class));
             }
         }

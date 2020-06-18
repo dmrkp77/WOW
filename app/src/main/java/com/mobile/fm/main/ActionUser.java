@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,9 +34,12 @@ public class ActionUser extends Fragment {
     public ActionUser(Context context) {
         this.activity = (ContentActivity) context;
     }
+
     //firebase auth object
     private FirebaseAuth firebaseAuth;
 
+    private ImageView userPicture;
+    private Button buttonUserInfo;
     private Button buttonLogout;
     private TextView textViewUserEmail;
     private TextView textivewDelete;
@@ -48,9 +51,11 @@ public class ActionUser extends Fragment {
 
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_user, container,false);
         textViewUserEmail = (TextView) viewGroup.findViewById(R.id.textviewUserEmail);
+        buttonUserInfo = (Button) viewGroup.findViewById(R.id.buttonUserInfo);
         buttonLogout = (Button) viewGroup.findViewById(R.id.buttonLogout);
         textivewDelete = (TextView) viewGroup.findViewById(R.id.textviewDelete);
 
+        buttonUserInfo.setOnClickListener(listener);
         buttonLogout.setOnClickListener(listener);
         textivewDelete.setOnClickListener(listener);
 
@@ -65,6 +70,10 @@ public class ActionUser extends Fragment {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
+            if(view == buttonUserInfo){
+                activity.startActivity(new Intent(getContext(), UserInfoActivity.class));
+            }
 
             //로그아웃 클릭 시 로그아웃
             if(view == buttonLogout){

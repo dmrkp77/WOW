@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialiconssharp/add/sharp_add_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/keyboard_backspace/baseline_keyboard_backspace_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_sharp_add_24" />
+                            <entry key="outputName" value="ic_backspace" />
                             <entry key="sourceFile" value="C:\Users\user\AndroidStudioProjects\WOW" />
                           </map>
                         </option>

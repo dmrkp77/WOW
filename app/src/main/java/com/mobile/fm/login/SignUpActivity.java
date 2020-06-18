@@ -26,19 +26,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.mobile.fm.BackPressHandler;
 import com.mobile.fm.User;
 import com.mobile.fm.main.ContentActivity;
 import com.mobile.fm.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
+//    private BackPressHandler backPressHandler = new BackPressHandler(this);
     //define view objects
     EditText editTextEmail;
     EditText editTextPassword;
     EditText editTextUsername;
     Button buttonSignup;
-    TextView textviewSingin;
-    TextView textviewMessage;
+
+//    TextView textviewSingin;
+//    TextView textviewMessage;
     ProgressDialog progressDialog;
     //define firebase object
     FirebaseAuth firebaseAuth;
@@ -64,14 +71,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         editTextUsername = (EditText)findViewById(R.id.editTextUserName);
-        textviewSingin = (TextView) findViewById(R.id.textViewSignin);
-        textviewMessage = (TextView) findViewById(R.id.textviewMessage);
+//        textviewSingin = (TextView) findViewById(R.id.textViewSignin);
+//        textviewMessage = (TextView) findViewById(R.id.textviewMessage);
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
         progressDialog = new ProgressDialog(this);
 
         //button click event
         buttonSignup.setOnClickListener(this);
-        textviewSingin.setOnClickListener(this);
+//        textviewSingin.setOnClickListener(this);
     }
 
     //Firebse creating a new user
@@ -107,9 +114,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             String password = editTextPassword.getText().toString().trim();
                             String username = editTextUsername.getText().toString().trim();
                             firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                            User user = new User(username,email,password,firebaseUser.getUid(),null);
+
+                            long now = System.currentTimeMillis();
+                            Date date = new Date(now);
+                            SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy.MM.dd    HH:MM:ss");
+                            String formatDate = sdfNow.format(date);
+
+
+                            User user = new User(formatDate,username,email,password,firebaseUser.getUid(),null);
                             FirebaseFirestore db=FirebaseFirestore.getInstance();
-                            db.collection("User").document(username).set(user)
+                            db.collection("User").document(email).set(user)
                                     .addOnSuccessListener(new OnSuccessListener<Void>(){
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -141,9 +155,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         }
 
-        if (view == textviewSingin) {
-            //TODO
-            startActivity(new Intent(this, LoginActivity.class)); //추가해 줄 로그인 액티비티
-        }
+//        if (view == textviewSingin) {
+//            //TODO
+//            finish();
+//            startActivity(new Intent(this, LoginActivity.class)); //추가해 줄 로그인 액티비티
+//        }
     }
+//
+//    @Override
+//    public void onBackPressed() {
+//        // Toast 메세지 사용자 지정
+//        backPressHandler.onBackPressed("뒤로가기 버튼 한번 더 누르면 종료");
+//    }
 }

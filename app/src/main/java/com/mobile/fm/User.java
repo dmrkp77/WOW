@@ -7,15 +7,26 @@ public class User {
     public String email;
     public String password;
     public String uid;
+    public String registerDate;
     public ArrayList<String> bookmark;
 
-    public User(String username, String email, String password,String uid,ArrayList<String> bookmark) {
+    public User(String registerDate, String username, String email, String password,String uid,ArrayList<String> bookmark) {
+        this.registerDate = registerDate;
         this.username = username;
         this.email = email;
         this.password = password;
         this.uid = uid;
         this.bookmark=bookmark;
     }
+
+    public String getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(String rigisterDate) {
+        this.registerDate = rigisterDate;
+    }
+
     public String getUsername() {
         return username;
     }

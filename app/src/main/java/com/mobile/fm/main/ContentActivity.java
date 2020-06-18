@@ -51,6 +51,7 @@ public class ContentActivity extends AppCompatActivity {
 //
 //    }
 
+    //프래그먼트-액티비티 로그아웃 구현
     public void Logout() {
         firebaseAuth.signOut();
         finish();
