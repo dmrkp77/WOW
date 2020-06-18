@@ -7,7 +7,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mobile.fm.R;
 import com.mobile.fm.exerciseboard.FirebaseHelper;
 import com.mobile.fm.exerciseboard.PostInfo;
@@ -19,6 +22,8 @@ public class PostActivity extends BasicActivity {
     private FirebaseHelper firebaseHelper;
     private ReadContentsVIew readContentsVIew;
     private LinearLayout contentsLayout;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +61,22 @@ public class PostActivity extends BasicActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         switch (item.getItemId()) {
             case R.id.delete:
-                firebaseHelper.storageDelete(postInfo);
+                if(postInfo.getPublisher().toString().equals(firebaseUser.getUid().toString())) {
+                    firebaseHelper.storageDelete(postInfo);
+                }else{
+                    Toast.makeText(this, "삭제 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.modify:
-                myStartActivity(WritePostActivity.class, postInfo);
+                if(postInfo.getPublisher().toString().equals(firebaseUser.getUid().toString())) {
+                    myStartActivity(WritePostActivity.class, postInfo);
+                }else{
+                    Toast.makeText(this, "수정 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

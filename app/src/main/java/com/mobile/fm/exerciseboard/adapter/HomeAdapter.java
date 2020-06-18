@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
@@ -16,6 +17,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mobile.fm.R;
 import com.mobile.fm.exerciseboard.FirebaseHelper;
 import com.mobile.fm.exerciseboard.PostInfo;
@@ -32,6 +35,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
     private FirebaseHelper firebaseHelper;
     private ArrayList<ArrayList<SimpleExoPlayer>> playerArrayListArrayList = new ArrayList<>();
     private final int MORE_INDEX = 2;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     static class MainViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -113,15 +118,27 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
 
     private void showPopup(View v, final int position) {
         PopupMenu popup = new PopupMenu(activity, v);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.modify:
-                        myStartActivity(WritePostActivity.class, mDataset.get(position));
+                        if(mDataset.get(position).getPublisher().equals(firebaseUser.getUid())) {
+                            myStartActivity(WritePostActivity.class, mDataset.get(position));
+                        }else{
+                            Toast.makeText(activity, "수정 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
                         return true;
                     case R.id.delete:
-                        firebaseHelper.storageDelete(mDataset.get(position));
+                        if(mDataset.get(position).getPublisher().equals(firebaseUser.getUid())) {
+                            firebaseHelper.storageDelete(mDataset.get(position));
+                        }else{
+                            Toast.makeText(activity, "삭제 권한이 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
                         return true;
                     default:
                         return false;
