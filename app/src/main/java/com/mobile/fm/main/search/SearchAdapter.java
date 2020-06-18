@@ -1,10 +1,11 @@
-package com.mobile.fm.main;
+package com.mobile.fm.main.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.mobile.fm.R;
@@ -56,8 +57,12 @@ public class SearchAdapter extends BaseAdapter {
         return convertView;
     }
 
+
+
+
     class ViewHolder{
         public TextView label;
     }
+
 
 }

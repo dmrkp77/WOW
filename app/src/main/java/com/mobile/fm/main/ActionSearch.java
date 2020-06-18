@@ -1,38 +1,31 @@
 package com.mobile.fm.main;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Handler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mobile.fm.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.ScheduledExecutorService;
 
 import javax.annotation.Nullable;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import com.mobile.fm.exerciseboard.PostInfo;
+import com.mobile.fm.main.search.SearchAdapter;
 
 public class ActionSearch extends Fragment {
 
@@ -42,8 +35,10 @@ public class ActionSearch extends Fragment {
     private SearchAdapter adapter;      // 리스트뷰에 연결할 아답터
     private ArrayList<String> arraylist;
     private ViewGroup viewGroup;
-
+//    private Button searchbtn;
+    private ArrayList<PostInfo> searchRe;
     ContentActivity activity;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ActionSearch(Context context) {
         this.activity = (ContentActivity) context;
@@ -57,7 +52,8 @@ public class ActionSearch extends Fragment {
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_search, container, false);
         editSearch = (EditText) viewGroup.findViewById(R.id.editSearch);
         listView = (ListView) viewGroup.findViewById(R.id.listView);
-
+        //searchbtn=(Button) viewGroup.findViewById(R.id.searchbutton);
+//        searchbtn.setOnClickListener(onClickListener);
         // 리스트를 생성한다.
         list = new ArrayList<String>();
 
@@ -97,6 +93,20 @@ public class ActionSearch extends Fragment {
 
         return viewGroup;
     }
+//        View.OnClickListener onClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            switch (v.getId()) {
+//                case R.id.searchbutton:
+//                    myStartActivity(SearchMainActivity.class);
+//                    break;
+//            }
+//        }
+//    };
+//    private void myStartActivity(Class c) {
+//        Intent intent = new Intent(getActivity(), c);
+//        startActivityForResult(intent, 0);
+//    }
 
     // 검색을 수행하는 메소드
     public void search(String charText) {
@@ -125,6 +135,9 @@ public class ActionSearch extends Fragment {
 
     // 검색에 사용될 데이터를 리스트에 추가한다.
     private void settingList() {
+//        db.collection("post")
+//                .get()
+//                .addOnSuccessListener()
 
 
     }
