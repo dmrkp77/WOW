@@ -173,7 +173,8 @@ public class HomeFragment extends Fragment {
                                         (ArrayList<String>) document.getData().get("formats"),
                                         document.getData().get("publisher").toString(),
                                         new Date(document.getDate("createdAt").getTime()),
-                                        document.getId()));
+                                        document.getId(),
+                                        document.getData().get("nid").toString()));
                             }
                             homeAdapter.notifyDataSetChanged();
                         } else {

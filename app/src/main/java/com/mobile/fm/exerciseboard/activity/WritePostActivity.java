@@ -14,12 +14,19 @@ import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
@@ -27,6 +34,7 @@ import com.google.firebase.storage.UploadTask;
 import com.mobile.fm.R;
 import com.mobile.fm.exerciseboard.PostInfo;
 import com.mobile.fm.exerciseboard.view.ContentsItemView;
+import com.squareup.okhttp.internal.DiskLruCache;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,6 +42,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 import static com.mobile.fm.exerciseboard.Util.GALLERY_IMAGE;
 import static com.mobile.fm.exerciseboard.Util.GALLERY_VIDEO;
@@ -47,7 +56,9 @@ import static com.mobile.fm.exerciseboard.Util.storageUrlToName;
 
 public class WritePostActivity extends BasicActivity {
     private static final String TAG = "WritePostActivity";
+    private String uId;
     private FirebaseUser user;
+    private FirebaseFirestore  firebaseFirestore = FirebaseFirestore.getInstance();
     private StorageReference storageRef;
     private ArrayList<String> pathList = new ArrayList<>();
     private LinearLayout parent;
@@ -78,6 +89,7 @@ public class WritePostActivity extends BasicActivity {
         findViewById(R.id.imageModify).setOnClickListener(onClickListener);
         findViewById(R.id.videoModify).setOnClickListener(onClickListener);
         findViewById(R.id.delete).setOnClickListener(onClickListener);
+
 
         buttonsBackgroundLayout.setOnClickListener(onClickListener);
         contentsEditText.setOnFocusChangeListener(onFocusChangeListener);
@@ -214,11 +226,14 @@ public class WritePostActivity extends BasicActivity {
             user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseStorage storage = FirebaseStorage.getInstance();
             StorageReference storageRef = storage.getReference();
-            FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
             final DocumentReference documentReference = postInfo == null ? firebaseFirestore.collection("posts").document() : firebaseFirestore.collection("posts").document(postInfo.getId());
             final Date date = postInfo == null ? new Date() : postInfo.getCreatedAt();
             for (int i = 0; i < parent.getChildCount(); i++) {
-                LinearLayout linearLayout = (LinearLayout) parent.getChildAt(i);
+                LinearLayout linearLayout;
+                if(parent.getChildAt(i) instanceof LinearLayout) {
+                    linearLayout = (LinearLayout) parent.getChildAt(i);
+                }else
+                    continue;
                 for (int ii = 0; ii < linearLayout.getChildCount(); ii++) {
                     View view = linearLayout.getChildAt(ii);
                     if (view instanceof EditText) {
@@ -250,15 +265,24 @@ public class WritePostActivity extends BasicActivity {
                                 }
                             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                                     final int index = Integer.parseInt(taskSnapshot.getMetadata().getCustomMetadata("index"));
+
                                     mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             successCount--;
                                             contentsList.set(index, uri.toString());
                                             if (successCount == 0) {
-                                                PostInfo postInfo = new PostInfo(title, contentsList, formatList, user.getUid(), date);
+                                                CollectionReference collectionReference = firebaseFirestore.collection("User");
+                                                collectionReference.document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                        Map<String,Object> snap = task.getResult().getData();
+                                                        uId = snap.get("username").toString();
+                                                    }
+                                                });
+                                                PostInfo postInfo = new PostInfo(title, contentsList, formatList, user.getUid(), date,uId);
                                                 storeUpload(documentReference, postInfo);
                                             }
                                         }
@@ -273,7 +297,16 @@ public class WritePostActivity extends BasicActivity {
                 }
             }
             if (successCount == 0) {
-                storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date));
+                CollectionReference collectionReference = firebaseFirestore.collection("User");
+                collectionReference.document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        Map<String,Object> snap = task.getResult().getData();
+                        uId = snap.get("username").toString();
+                        storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date,uId));
+                    }
+
+                });
             }
         } else {
             showToast(WritePostActivity.this, "제목을 입력해주세요.");

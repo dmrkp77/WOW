@@ -12,14 +12,24 @@ public class PostInfo implements Serializable {
     private ArrayList<String> formats;
     private String publisher;
     private Date createdAt;
+    private String nid;
     private String id;
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id){
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String nid){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
         this.publisher = publisher;
         this.createdAt = createdAt;
+        this.nid = nid;
+    }
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id,String nid){
+        this.title = title;
+        this.contents = contents;
+        this.formats = formats;
+        this.publisher = publisher;
+        this.createdAt = createdAt;
+        this.nid = nid;
         this.id = id;
     }
 
@@ -38,6 +48,7 @@ public class PostInfo implements Serializable {
         docData.put("formats",formats);
         docData.put("publisher",publisher);
         docData.put("createdAt",createdAt);
+        docData.put("nid",nid);
         return  docData;
     }
 
@@ -71,10 +82,12 @@ public class PostInfo implements Serializable {
     public void setCreatedAt(Date createdAt){
         this.createdAt = createdAt;
     }
+    public String getNid(){
+        return this.nid;
+    }
+    public void setNid(String nid){ this.nid = nid; }
     public String getId(){
         return this.id;
     }
-    public void setId(String id){
-        this.id = id;
-    }
+    public void setId(String id){this.id = id; }
 }

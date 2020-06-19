@@ -3,6 +3,7 @@ package com.mobile.fm.exerciseboard.view;
 import android.content.Context;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import com.mobile.fm.exerciseboard.PostInfo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class ReadContentsVIew extends LinearLayout {
@@ -59,19 +61,58 @@ public class ReadContentsVIew extends LinearLayout {
 
     public void setPostInfo(PostInfo postInfo){
         TextView createdAtTextView = findViewById(R.id.createAtTextView);
-        createdAtTextView.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(postInfo.getCreatedAt()));
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyMMddHHmmss");
+        Date ndate= new Date();
+        Date ydate= postInfo.getCreatedAt();
+        long diff=ndate.getTime()-ydate.getTime();
+        diff=diff/60000;
+        String time;
+        if(ndate.getDay()!=ydate.getDay()) {
+            time= new SimpleDateFormat("MM.dd", Locale.getDefault()).format(postInfo.getCreatedAt()).toString();
+        }
+        else if(diff<61){
+            time= diff+"";
+            time+="분 전";
 
+        }else if(diff<3601) {
+            time = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(postInfo.getCreatedAt()).toString();
+        }
+
+        else{
+            time= new SimpleDateFormat("MM.dd", Locale.getDefault()).format(postInfo.getCreatedAt()).toString();
+        }
+        time += " | ";
+        time += postInfo.getNid();
+        createdAtTextView.setText(time);
         LinearLayout contentsLayout = findViewById(R.id.so_contentsLayout);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ArrayList<String> contentsList = postInfo.getContents();
         ArrayList<String> formatList = postInfo.getFormats();
+        int media=0;
+        for (int i = 0; i < contentsList.size(); i++) {
+            String contents = contentsList.get(i);
+            String formats = formatList.get(i);
+            if(formats.equals("video")||formats.equals("image")){
+                media=1;
+                break;
+            }
+        }
+        Log.d("NO123", "Here1");
 
         for (int i = 0; i < contentsList.size(); i++) {
             if (i == moreIndex) {
-                TextView textView = new TextView(context);
-                textView.setLayoutParams(layoutParams);
-                textView.setText("더보기...");
-                contentsLayout.addView(textView);
+                if(media==2){
+                    TextView textView = new TextView(context);
+                    textView.setLayoutParams(layoutParams);
+                    textView.setText("미디어 더보기...");
+                    contentsLayout.addView(textView);
+                }
+                else {
+                    TextView textView = new TextView(context);
+                    textView.setLayoutParams(layoutParams);
+                    textView.setText("더보기...");
+                    contentsLayout.addView(textView);
+                }
                 break;
             }
 
@@ -79,10 +120,24 @@ public class ReadContentsVIew extends LinearLayout {
             String formats = formatList.get(i);
 
             if(formats.equals("image")){
+                if(moreIndex==2){
+                    TextView textView = new TextView(context);
+                    textView.setLayoutParams(layoutParams);
+                    textView.setText("사진");
+                    contentsLayout.addView(textView);
+                    break;
+                }
                 ImageView imageView = (ImageView)layoutInflater.inflate(R.layout.view_contents_image, this, false);
                 contentsLayout.addView(imageView);
                 Glide.with(this).load(contents).override(1000).thumbnail(0.1f).into(imageView);
             }else if(formats.equals("video")){
+                if(moreIndex==2){
+                    TextView textView = new TextView(context);
+                    textView.setLayoutParams(layoutParams);
+                    textView.setText("동영상");
+                    contentsLayout.addView(textView);
+                    break;
+                }
                 final PlayerView playerView = (PlayerView) layoutInflater.inflate(R.layout.view_contents_player, this, false);
 
                 DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(context,
@@ -106,7 +161,23 @@ public class ReadContentsVIew extends LinearLayout {
                 playerView.setPlayer(player);
                 contentsLayout.addView(playerView);
             }else{
+                if(moreIndex==2) {
+                    TextView textView = (TextView) layoutInflater.inflate(R.layout.view_contents_text, this, false);
+                    int length = contents.length();
+                    if(length > 20){
+
+                        String c = contents.substring(0, 20);
+                        textView.setText(c+"...");
+                    }
+                    else{
+                        textView.setText(contents);
+                    }
+
+                    contentsLayout.addView(textView);
+                    break;
+                }
                 TextView textView = (TextView) layoutInflater.inflate(R.layout.view_contents_text, this, false);
+
                 textView.setText(contents);
                 contentsLayout.addView(textView);
             }

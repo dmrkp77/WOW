@@ -21,19 +21,19 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <EditText
-                android:id="@+id/titleEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="제목"
-                android:inputType="textPersonName" />
-
             <LinearLayout
                 android:id="@+id/contentsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/titleEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="제목"
+                    android:inputType="textPersonName" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -78,6 +78,13 @@
         </LinearLayout>
 
     </ScrollView>
+
+
+    <Spinner
+        android:id="@+id/board_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:id="@+id/buttonsBackgroundLayout"

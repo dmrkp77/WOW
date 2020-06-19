@@ -207,7 +207,8 @@ public class ActionSearch extends Fragment {
                                         (ArrayList<String>) document.getData().get("formats"),
                                         document.getData().get("publisher").toString(),
                                         new Date(document.getDate("createdAt").getTime()),
-                                        document.getId()));
+                                        document.getId(),
+                                        document.getData().get("nid").toString()));
                             }
                         } else {
                             Log.d("so", "Error getting documents: ", task.getException());
