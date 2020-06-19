@@ -2,10 +2,13 @@ package com.mobile.fm.main;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,15 +19,18 @@ import com.mobile.fm.login.LoginActivity;
 public class ContentActivity extends AppCompatActivity {
     private static final String TAG = "ContentActivity";
 
+    public FragmentManager manager = getSupportFragmentManager();
     //firebase auth object
     private FirebaseAuth firebaseAuth;
 
     //menu objects
     BottomNavigationView bottomNavigationView;
-    ActionBookmark actionBookmark;
-    ActionHome actionHome;
-    ActionSearch actionSearch;
-    ActionUser actionUser;
+    public ActionBookmark actionBookmark;
+    public ActionHome actionHome;
+    public ActionSearch actionSearch;
+    public ActionUser actionUser;
+
+    private int FragmentNow = 0; // 0 : 홈, 1:검색, 2:즐찾, 3:정보
 
     //view objects
    /* private TextView textViewUserEmail;
@@ -36,20 +42,6 @@ public class ContentActivity extends AppCompatActivity {
     private Button exercisebtn;
     private Button tvbtn;
     private Button moviebtn;*/
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        Intent intent = getIntent();
-//        Boolean logout = intent.getBooleanExtra("로그아웃", false);
-//
-//        if (logout.equals(true)) {
-//            firebaseAuth.signOut();
-//            startActivity(new Intent(this, LoginActivity.class));
-//        }
-//
-//    }
 
     //프래그먼트-액티비티 로그아웃 구현
     public void Logout() {
@@ -64,12 +56,6 @@ public class ContentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_content);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        //making fragment
-        actionBookmark = new ActionBookmark();
-        actionHome = new ActionHome();
-        actionSearch = new ActionSearch(this);
-        actionUser = new ActionUser(this);
-
         //initializing views
        /* textViewUserEmail = (TextView) findViewById(R.id.textviewUserEmail);
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
@@ -80,6 +66,13 @@ public class ContentActivity extends AppCompatActivity {
         exercisebtn = (Button) findViewById(R.id.exercisebtn);
         tvbtn = (Button) findViewById(R.id.tvbtn);
         moviebtn = (Button) findViewById(R.id.moviebtn);*/
+
+        //making fragment
+        actionBookmark = new ActionBookmark();
+        actionHome = new ActionHome();
+        actionSearch = new ActionSearch(this);
+        actionUser = new ActionUser(this);
+
 
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
@@ -107,7 +100,7 @@ public class ContentActivity extends AppCompatActivity {
 
 
         //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_layout, actionHome).commitAllowingStateLoss();
+        manager.beginTransaction().replace(R.id.content_layout, actionHome).commitAllowingStateLoss();
 
         //bottomnavigationview의 아이콘을 선택 했을때 원하는 프래그먼트가 띄워질 수 있도록 리스너를 추가합니다.
         bottomNavigationView.setOnNavigationItemSelectedListener
@@ -147,6 +140,27 @@ public class ContentActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private long backPressedTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        int seletedItemId = bottomNavigationView.getSelectedItemId();
+        if (R.id.action_home == seletedItemId) {
+            if (System.currentTimeMillis() - backPressedTime >= 2000) {
+                backPressedTime = System.currentTimeMillis();
+                Toast.makeText(ContentActivity.this, "뒤로가기 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                finish(); //액티비티 종료
+            }
+        } else if (R.id.action_search == seletedItemId || R.id.action_bookmark == seletedItemId || R.id.action_user == seletedItemId) {
+            manager.beginTransaction().replace(R.id.content_layout, actionHome).commitAllowingStateLoss();
+            bottomNavigationView.setSelectedItemId(R.id.action_home);
+        } else {
+            super.onBackPressed();
+        }
+
     }
 
     /*@Override

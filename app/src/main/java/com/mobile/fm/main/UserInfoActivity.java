@@ -36,11 +36,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Text;
 
 public class UserInfoActivity extends AppCompatActivity {
-    private static final String TAG = "UserInfoActivity";
+    private final String TAG = "UserInfoActivity";
 
-    private static final String KEY_USERNAME = "username";
-    private static final String KEY_PASSWORD = "password";
-    private static final String KEY_REGISTERDATE = "registerDate";
+    private final String KEY_USERNAME = "username";
+    private final String KEY_PASSWORD = "password";
+    private final String KEY_REGISTERDATE = "registerDate";
 
     private ImageButton backbtn;
     private EditText username;
