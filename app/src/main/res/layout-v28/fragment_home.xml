@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DDD"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFF"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Today"
+                        android:textColor="#5e5e5e"
+                        android:textSize="24sp"/>
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="6dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:background="#660000aa" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="What will you do?"
+                    android:textColor="#5e5e5e"
+                    android:textSize="18sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:elevation="0dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="5dp"
+                    android:outlineAmbientShadowColor="#AAA"
+                    android:outlineSpotShadowColor="#AAA"
+                    >
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp"
+                        android:src="@drawable/sky"
+                        android:scaleType="fitXY"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Good Morning!"
+                                android:textColor="#ffff"
+                                android:textSize="18dp"
+                                android:shadowRadius="3.0"
+                                android:shadowDx="2.0"
+                                android:shadowDy="2.0"
+                                android:shadowColor="#000000"/>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Android Developer"
+                                android:textColor="#ffff"
+                                android:textSize="24sp"
+                                android:shadowRadius="3.0"
+                                android:shadowDx="2.0"
+                                android:shadowDy="2.0"
+                                android:shadowColor="#000000"/>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:text="21 C"
+                                    android:textColor="#ffff"
+                                    android:textSize="18sp"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Sun"
+                                    android:textColor="#ffff"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="20 C"
+                                    android:textColor="#ffff"
+                                    android:textSize="18sp"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Mon"
+                                    android:textColor="#ffff"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="20 C"
+                                    android:textColor="#ffff"
+                                    android:textSize="18sp"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Tue"
+                                    android:textColor="#ffff"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="20 C"
+                                    android:textColor="#ffff"
+                                    android:textSize="18sp"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Wed"
+                                    android:textColor="#ffff"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="20 C"
+                                    android:textColor="#ffff"
+                                    android:textSize="18sp"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Thu"
+                                    android:textColor="#ffff"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="20 C"
+                                    android:textColor="#ffff"
+                                    android:textSize="18sp"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Fri"
+                                    android:textColor="#ffff"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="20 C"
+                                    android:textColor="#ffff"
+                                    android:textSize="18sp"
+                                    android:shadowRadius="3.0"
+                                    android:shadowDx="2.0"
+                                    android:shadowDy="2.0"
+                                    android:shadowColor="#000000"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#FFF">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Start new vacation"
+                    android:textColor="#5e5e5e"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="24sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff"
+                        >
+
+                        <Button
+                            android:id="@+id/musicbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            />
+
+                        <RelativeLayout
+                            android:id="@+id/musicLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@drawable/music2"
+
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="-5dp"
+                                android:text="Music"
+                                android:shadowRadius="3.0"
+                                android:shadowDx="2.0"
+                                android:shadowDy="2.0"
+                                android:shadowColor="#000000"
+
+                                android:textColor="#FFF"
+                                android:textSize="25sp" />
+
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@drawable/reading2">
+
+                            <Button
+                                android:id="@+id/readingbtn"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="-5dp"
+                                android:text="Reading"
+                                android:shadowRadius="3.0"
+                                android:shadowDx="2.0"
+                                android:shadowDy="2.0"
+                                android:shadowColor="#000000"
+
+                                android:textColor="#FFF"
+                                android:textSize="25sp" />
+
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff">
+
+                        <Button
+                            android:id="@+id/travelbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@drawable/travel2">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="-5dp"
+                                android:text="Travel"
+                                android:shadowRadius="3.0"
+                                android:shadowDx="2.0"
+                                android:shadowDy="2.0"
+                                android:shadowColor="#000000"
+
+                                android:textColor="#FFF"
+                                android:textSize="25sp" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff">
+
+                        <Button
+                            android:id="@+id/exercisebtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@drawable/exercising">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="-5dp"
+                                android:text="Work out"
+                                android:shadowRadius="3.0"
+                                android:shadowDx="2.0"
+                                android:shadowDy="2.0"
+                                android:shadowColor="#000000"
+
+                                android:textColor="#FFF"
+                                android:textSize="25sp" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff"
+                        android:outlineSpotShadowColor="#333">
+
+                        <Button
+                            android:id="@+id/tvbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@drawable/tv2">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="-5dp"
+                                android:shadowColor="#000000"
+                                android:shadowDx="2.0"
+                                android:shadowDy="2.0"
+                                android:shadowRadius="3.0"
+                                android:text="TV"
+
+                                android:textColor="#FFF"
+                                android:textSize="25sp" />
+
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff">
+
+                        <Button
+                            android:id="@+id/moviebtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:background="@drawable/movie2">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_marginBottom="-5dp"
+                                android:text="Movie"
+                                android:shadowRadius="3.0"
+                                android:shadowDx="2.0"
+                                android:shadowDy="2.0"
+                                android:shadowColor="#000000"
+
+                                android:textColor="#FFF"
+                                android:textSize="25sp" />
+
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

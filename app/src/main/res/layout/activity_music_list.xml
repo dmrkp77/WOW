@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".music.MusicListActivity">
+    tools:context=".music.activity.MusicListActivity">
 
     <ScrollView
         android:layout_width="match_parent"

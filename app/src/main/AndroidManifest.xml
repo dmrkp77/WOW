@@ -11,13 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.search.SearchPostActivity"></activity>
-        <!-- <activity android:name="com.mobile.fm.main.ActionBookmark"></activity> -->
+        <activity android:name=".category.activity.BoardActivity"></activity>
+        <activity android:name=".main.search.SearchPostActivity" /> <!-- <activity android:name="com.mobile.fm.main.ActionBookmark"></activity> -->
         <!-- <activity android:name="com.mobile.fm.main.ActionUser" /> -->
         <!-- <activity android:name="com.mobile.fm.main.ActionSearch" /> -->
         <!-- <activity android:name="com.mobile.fm.main.ActionHome" /> -->
-        <activity android:name=".music.MusicActivity" />
-        <activity android:name=".music.MusicListActivity" />
+        <activity android:name=".music.activity.MusicActivity" />
+        <activity android:name=".music.activity.MusicListActivity" />
         <activity android:name=".login.FindActivity" />
         <activity android:name=".main.ContentActivity" />
         <activity android:name=".login.SignUpActivity" />
@@ -27,6 +27,8 @@
         <activity android:name=".exerciseboard.activity.PostActivity" />
         <activity android:name=".exerciseboard.activity.WritePostActivity" />
         <activity android:name=".main.UserInfoActivity" />
+        <activity android:name=".category.activity.CategoryMainActivity" />
+        <activity android:name=".category.activity.RecommendationsActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

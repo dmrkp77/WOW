@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:ambientShadowAlpha">0.8</item>
+        <item name="android:spotShadowAlpha">0.8</item>
+    </style>
+    <style name="deleteShadow">
+        <item name="android:outlineAmbientShadowColor">#FFF</item>
+        <item name="android:outlineSpotShadowColor">#FFF</item>
+    </style>
+</resources>

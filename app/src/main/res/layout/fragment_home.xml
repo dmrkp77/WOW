@@ -63,7 +63,9 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="8dp"
-                    app:cardElevation="2dp"
+                    app:cardElevation="5dp"
+                    android:outlineAmbientShadowColor="#AAA"
+                    android:outlineSpotShadowColor="#AAA"
                     >
                     <ImageView
                         android:layout_width="match_parent"
@@ -320,21 +322,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#FFF"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
+                android:background="#FFF">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Start new vacation"
                     android:textColor="#5e5e5e"
+                    android:layout_marginLeft="15dp"
                     android:textSize="24sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
@@ -342,7 +342,10 @@
                         android:layout_height="120dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp"
+                        app:cardElevation="4dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff"
                         >
 
                         <Button
@@ -386,10 +389,13 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="160dp"
                         android:layout_height="120dp"
-                        android:layout_marginLeft="18dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="4dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -429,7 +435,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
@@ -437,7 +442,10 @@
                         android:layout_height="120dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="4dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff">
 
                         <Button
                             android:id="@+id/travelbtn"
@@ -475,10 +483,13 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="160dp"
                         android:layout_height="120dp"
-                        android:layout_marginLeft="18dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="4dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff">
 
                         <Button
                             android:id="@+id/exercisebtn"
@@ -517,7 +528,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
@@ -525,7 +535,11 @@
                         android:layout_height="120dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="4dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff"
+                        android:outlineSpotShadowColor="#333">
 
                         <Button
                             android:id="@+id/tvbtn"
@@ -564,10 +578,13 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="160dp"
                         android:layout_height="120dp"
-                        android:layout_marginLeft="18dp"
                         android:layout_weight="1"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="2dp">
+                        app:cardElevation="4dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginVertical="8dp"
+                        android:outlineAmbientShadowColor="#fff">
 
                         <Button
                             android:id="@+id/moviebtn"

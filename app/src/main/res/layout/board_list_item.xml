@@ -3,83 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="15dp"
+    android:paddingVertical="5dp">
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:text="제목" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+
+        android:maxLength="20"
+        android:textSize="15dp"
+        android:text="내용" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="시간"
+            />
+        <TextView
+            android:id="@+id/tv_userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="닉네임" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="right">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                app:srcCompat="?android:attr/textSelectHandleLeft" />
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_commentNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:text="제목" />
-
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="3dp"
-
-                android:maxLength="20"
-                android:textSize="15dp"
-                android:text="내용" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="시간"
-                    />
-                <TextView
-                    android:id="@+id/tv_userName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="닉네임" />
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="25dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="?android:attr/textSelectHandleLeft" />
-
-                <TextView
-                    android:id="@+id/tv_commentNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="5dp"
-                    android:text="수" />
-            </LinearLayout>
-
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"
+                android:text="수" />
         </LinearLayout>
-
     </LinearLayout>
-    
-    
-
 </LinearLayout>

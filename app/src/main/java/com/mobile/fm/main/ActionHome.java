@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import com.mobile.fm.R;
+import com.mobile.fm.category.activity.CategoryMainActivity;
 import com.mobile.fm.exerciseboard.activity.MainActivity;
-import com.mobile.fm.music.MusicActivity;
+import com.mobile.fm.music.activity.MusicActivity;
+import com.mobile.fm.music.activity.MusicListActivity;
 
 import javax.annotation.Nullable;
 
@@ -53,24 +55,26 @@ public class ActionHome extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         //버튼을 눌러 각 액티비티에 맞는 화면으로 이동한다.
+        Intent intent = new Intent(getContext(), CategoryMainActivity.class);
         if (view == musicbtn) {
-            startActivity(new Intent(getContext(), MusicActivity.class));
+            intent.putExtra("category","Music");
         }
-
-        if (view == readingbtn) {
-            startActivity(new Intent(getContext(), MusicActivity.class));
+        else if (view == readingbtn) {
+            intent.putExtra("category","Reading");
         }
-        if (view == travelbtn) {
-            startActivity(new Intent(getContext(), MusicActivity.class));
+        else if (view == travelbtn) {
+            intent.putExtra("category","Travel");
         }
-        if (view == exercisebtn) {
-            startActivity(new Intent(getContext(), MainActivity.class));
+        else if (view == exercisebtn) {
+            intent.putExtra("category","Exercise");
         }
-        if (view == tvbtn) {
-            startActivity(new Intent(getContext(), MusicActivity.class));
+        else if (view == tvbtn) {
+            intent.putExtra("category","TV");
         }
-        if (view == moviebtn) {
-            startActivity(new Intent(getContext(), MusicActivity.class));
+        else if (view==moviebtn){
+            intent.putExtra("category","Movie");
         }
+        System.out.println("여기까지완료");
+        startActivity(intent);
     }
 }

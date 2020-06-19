@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/category_bg"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DDD">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:paddingBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/half_card_shape"
+
+                >
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/recommendations"
+                        android:textSize="25sp"
+                        android:textStyle="bold"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        >
+                        <Button
+                            android:id="@+id/recommendations_btn"
+                            android:stateListAnimator="@null"
+                            android:background="@null"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="more >"
+                            android:textSize="10sp"
+                            android:textColor="#666"
+                            android:layout_margin="5dp"
+                            android:minWidth="50dp"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_main_recyclerview_for_recommendations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="horizontal" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+
+                android:background="@drawable/card_shape"
+
+
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="@string/board"
+                        android:textStyle="bold"
+                        android:textSize="20sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        >
+                        <Button
+                            android:id="@+id/board_btn"
+                            android:stateListAnimator="@null"
+                            android:background="@null"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="more >"
+                            android:textSize="10sp"
+                            android:textColor="#666"
+                            android:layout_margin="5dp"
+                            android:minWidth="50dp"
+                            />
+
+                    </LinearLayout>
+                </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category_main_recyclerview_for_board"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>
