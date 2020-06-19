@@ -27,7 +27,8 @@
         app:itemIconTint="@drawable/item_color"
         app:itemTextColor="@drawable/item_color"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menu"
+        style="@style/deleteShadow"/>
 
 </LinearLayout>
 
