@@ -77,8 +77,6 @@ public class UserInfoActivity extends AppCompatActivity {
                             username.setText(documentSnapshot.getString(KEY_USERNAME));
                             password.setText(documentSnapshot.getString(KEY_PASSWORD));
                             registerDate.setText(documentSnapshot.getString(KEY_REGISTERDATE));
-
-//                            Map<String, Object> note = documentSnapshot.getData();
                         } else {
                             Toast.makeText(getApplicationContext(), "존재하지 않습니다.", Toast.LENGTH_SHORT).show();
                         }
