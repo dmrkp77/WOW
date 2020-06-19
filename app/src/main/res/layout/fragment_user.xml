@@ -63,7 +63,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                style="@style/deleteShadow">
 
                 <Button
                     android:id="@+id/buttonUserInfo"
@@ -99,7 +100,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                style="@style/deleteShadow">
 
                 <Button
                     android:id="@+id/buttonLogout"
