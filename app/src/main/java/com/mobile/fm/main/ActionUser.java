@@ -17,9 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mobile.fm.R;
 import com.mobile.fm.login.LoginActivity;
 import com.mobile.fm.login.SignUpActivity;
@@ -41,8 +45,11 @@ public class ActionUser extends Fragment {
     private ImageView userPicture;
     private Button buttonUserInfo;
     private Button buttonLogout;
+    private TextView textViewNickName;
     private TextView textViewUserEmail;
     private TextView textivewDelete;
+    private FirebaseFirestore db;
+    private DocumentReference docRef;
 
     @Nullable
     @Override
@@ -50,6 +57,7 @@ public class ActionUser extends Fragment {
                               @Nullable Bundle savedInstanceState) {
 
         viewGroup = (ViewGroup) inflater.inflate(R.layout.fragment_user, container,false);
+        textViewNickName = (TextView) viewGroup.findViewById(R.id.textviewNickname);
         textViewUserEmail = (TextView) viewGroup.findViewById(R.id.textviewUserEmail);
         buttonUserInfo = (Button) viewGroup.findViewById(R.id.buttonUserInfo);
         buttonLogout = (Button) viewGroup.findViewById(R.id.buttonLogout);
@@ -62,6 +70,20 @@ public class ActionUser extends Fragment {
 
         //textViewUserEmail의 내용을 변경해 준다.
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        docRef = db.collection("User").document(user.getEmail());
+
+
+        docRef.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                          @Override
+                                          public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                              if (documentSnapshot.exists()) {
+                                                  textViewNickName.setText(documentSnapshot.getString("username"));
+                                              }
+                                          }
+                                      });
+
         textViewUserEmail.setText(user.getEmail());
 
         return viewGroup;

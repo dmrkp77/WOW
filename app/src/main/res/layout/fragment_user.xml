@@ -34,20 +34,32 @@
 
         <ImageView
             android:id="@+id/userPicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:padding="10dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/profilepicture" />
+
+
+        <TextView
+            android:id="@+id/textviewNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:text=""
+            android:textSize="19sp"
+            android:textColor="#885E5E5E" />
 
         <TextView
             android:id="@+id/textviewUserEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
             android:text=""
+            android:textSize="21sp"
             android:textColor="#885E5E5E" />
 
         <LinearLayout
@@ -58,13 +70,13 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                style="@style/deleteShadow"
                 android:layout_width="160dp"
                 android:layout_height="120dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                style="@style/deleteShadow">
+                app:cardElevation="2dp">
 
                 <Button
                     android:id="@+id/buttonUserInfo"
@@ -81,11 +93,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="16dp"
-                        android:src="@drawable/ic_person_outline" />
+                        android:padding="20dp"
+                        android:src="@drawable/personinfo" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
                         android:text="사용자정보"
@@ -95,13 +109,13 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                style="@style/deleteShadow"
                 android:layout_width="160dp"
                 android:layout_height="120dp"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                style="@style/deleteShadow">
+                app:cardElevation="2dp">
 
                 <Button
                     android:id="@+id/buttonLogout"
@@ -118,11 +132,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="16dp"
+                        android:padding="10dp"
                         android:src="@drawable/ic_exit" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
                         android:text="로그아웃"
@@ -132,6 +148,7 @@
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <TextView
