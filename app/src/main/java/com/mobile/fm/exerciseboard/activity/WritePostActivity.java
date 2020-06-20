@@ -80,15 +80,14 @@ public class WritePostActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_post);
         setToolbarTitle("게시글 작성");
-
         parent = findViewById(R.id.contentsLayout);
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
         loaderLayout = findViewById(R.id.loaderLyaout);
         contentsEditText = findViewById(R.id.contentsEditText);
         titleEditText = findViewById(R.id.titleEditText);
         postInfo = (PostInfo) getIntent().getSerializableExtra("postInfo");
-
         final Spinner spinner= findViewById(R.id.spinner);
+
 
 
         findViewById(R.id.check).setOnClickListener(onClickListener);
@@ -98,7 +97,29 @@ public class WritePostActivity extends BasicActivity {
         findViewById(R.id.videoModify).setOnClickListener(onClickListener);
         findViewById(R.id.delete).setOnClickListener(onClickListener);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        String getcat=getIntent().getStringExtra("category");// 스피너 초기값설정
+        if(getcat.equals("Music")){
+            spinner.setSelection(0);
+        }
+        else if(getcat.equals("Reading")){
+            spinner.setSelection(1);
+        }
+        else if(getcat.equals("Travel")){
+            spinner.setSelection(2);
+        }
+        else if(getcat.equals("Exercise")){
+            spinner.setSelection(3);
+        }
+        else if(getcat.equals("TV")){
+            spinner.setSelection(4);
+        }
+        else if(getcat.equals("Movie")){
+            spinner.setSelection(5);
+        }
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {// 스피너 Listener
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
 
@@ -106,6 +127,7 @@ public class WritePostActivity extends BasicActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
 
             }
         });
