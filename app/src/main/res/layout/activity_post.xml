@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <include
         layout="@layout/view_toolbar"
@@ -24,8 +25,51 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/readContentsView">
 
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </com.mobile.fm.exerciseboard.view.ReadContentsVIew>
+            <LinearLayout
+                android:id="@+id/commentForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@+id/postTextLayout"
+                android:layout_marginTop="20dp"
+                android:weightSum="1.0"
+                android:layout_gravity="bottom">
+
+                <EditText
+                    android:id="@+id/enterCommentText"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:hint="Write a comment..."/>
+
+                <Button
+                    android:id="@+id/addCommentText"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="wrap_content"
+                    android:text="Post"
+                    android:onClick="addCommentTextClicked"/>
+
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerPostComments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/commentForm"
+                android:layout_marginTop="0dp"
+                tools:listitem="@layout/board_comment" >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
         </LinearLayout>
+
+
     </ScrollView>
 
 </RelativeLayout>

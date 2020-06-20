@@ -15,7 +15,7 @@ public class PostInfo implements Serializable {
     private String nid;//유저 닉네임
     private String id;//문서 이름(파이어베이스 문서 이름)
     private String boardSelect;
-
+    private int numComments=0;
 
     public PostInfo(String title, ArrayList<String> contents,String boardSelect, ArrayList<String> formats, String publisher, Date createdAt, String nid){
         this.title = title;
@@ -97,10 +97,13 @@ public class PostInfo implements Serializable {
     public String getBoardSelect() {
         return boardSelect;
     }
-
     public void setBoardSelect(String boardSelect) {
         this.boardSelect = boardSelect;
     }
-
-
+    public int getNumComments() {
+        return numComments;
+    }
+    public void setNumComments(int numComments) {
+        this.numComments = numComments;
+    }
 }
