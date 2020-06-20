@@ -26,7 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mobile.fm.R;
 import com.mobile.fm.login.LoginActivity;
-import com.mobile.fm.login.SignUpActivity;
+import com.mobile.fm.main.userinfo.UserInfoActivity;
 
 import javax.annotation.Nullable;
 
@@ -87,6 +87,22 @@ public class ActionUser extends Fragment {
         textViewUserEmail.setText(user.getEmail());
 
         return viewGroup;
+    }
+
+    //UserInfoActivity에서 빠져나올때도 자동 Username 변경
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        docRef.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            textViewNickName.setText(documentSnapshot.getString("username"));
+                        }
+                    }
+                });
     }
 
     View.OnClickListener listener = new View.OnClickListener() {

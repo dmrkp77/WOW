@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobile.fm">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".category.activity.BoardActivity"></activity>
+        <activity android:name=".main.userinfo.PasswordUpdateActivity"></activity>
+        <activity android:name=".category.activity.BoardActivity" />
         <activity android:name=".main.search.SearchPostActivity" /> <!-- <activity android:name="com.mobile.fm.main.ActionBookmark"></activity> -->
         <!-- <activity android:name="com.mobile.fm.main.ActionUser" /> -->
         <!-- <activity android:name="com.mobile.fm.main.ActionSearch" /> -->
@@ -29,7 +31,7 @@
         <activity android:name=".exerciseboard.activity.MainActivity" />
         <activity android:name=".exerciseboard.activity.PostActivity" />
         <activity android:name=".exerciseboard.activity.WritePostActivity" />
-        <activity android:name=".main.UserInfoActivity" />
+        <activity android:name=".main.userinfo.UserInfoActivity" />
         <activity android:name=".category.activity.CategoryMainActivity" />
         <activity android:name=".category.activity.RecommendationsActivity" />
         <activity android:name=".login.LoginActivity">
