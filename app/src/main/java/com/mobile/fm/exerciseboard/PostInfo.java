@@ -10,18 +10,21 @@ public class PostInfo implements Serializable {
     private String title;
     private ArrayList<String> contents;
     private ArrayList<String> formats;
-    private String publisher;
+    private String publisher;//유저 아이디
     private Date createdAt;
-    private String nid;
-    private String id;
+    private String nid;//유저 닉네임
+    private String id;//문서 이름(파이어베이스 문서 이름)
+    private String boardSelect;
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String nid){
+
+    public PostInfo(String title, ArrayList<String> contents,String boardSelect, ArrayList<String> formats, String publisher, Date createdAt, String nid){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
         this.publisher = publisher;
         this.createdAt = createdAt;
         this.nid = nid;
+        this.boardSelect = boardSelect;
     }
     public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id,String nid){
         this.title = title;
@@ -49,6 +52,7 @@ public class PostInfo implements Serializable {
         docData.put("publisher",publisher);
         docData.put("createdAt",createdAt);
         docData.put("nid",nid);
+        docData.put("boardSelect",boardSelect);
         return  docData;
     }
 
@@ -90,4 +94,13 @@ public class PostInfo implements Serializable {
         return this.id;
     }
     public void setId(String id){this.id = id; }
+    public String getBoardSelect() {
+        return boardSelect;
+    }
+
+    public void setBoardSelect(String boardSelect) {
+        this.boardSelect = boardSelect;
+    }
+
+
 }

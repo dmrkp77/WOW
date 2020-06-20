@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<PostInfo> postList;
     private boolean updating;
     private boolean topScrolled;
-
+    private String category;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -56,6 +56,8 @@ public class HomeFragment extends Fragment {
         postList = new ArrayList<>();
         homeAdapter = new HomeAdapter(getActivity(), postList);
         homeAdapter.setOnPostListener(onPostListener);
+
+
 
         final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         view.findViewById(R.id.floatingActionButton).setOnClickListener(onClickListener);
@@ -166,15 +168,18 @@ public class HomeFragment extends Fragment {
                                 postList.clear();
                             }
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                Bundle bundle=getArguments();
+                                category=bundle.getString("category");
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                postList.add(new PostInfo(
-                                        document.getData().get("title").toString(),
-                                        (ArrayList<String>) document.getData().get("contents"),
-                                        (ArrayList<String>) document.getData().get("formats"),
-                                        document.getData().get("publisher").toString(),
-                                        new Date(document.getDate("createdAt").getTime()),
-                                        document.getId(),
-                                        document.getData().get("nid").toString()));
+                                if(category.equals(document.getData().get("boardSelect").toString()))
+                                    postList.add(new PostInfo(
+                                            document.getData().get("title").toString(),
+                                            (ArrayList<String>) document.getData().get("contents"),
+                                            (ArrayList<String>) document.getData().get("formats"),
+                                            document.getData().get("publisher").toString(),
+                                            new Date(document.getDate("createdAt").getTime()),
+                                            document.getId(),
+                                            document.getData().get("nid").toString()));
                             }
                             homeAdapter.notifyDataSetChanged();
                         } else {
@@ -183,6 +188,10 @@ public class HomeFragment extends Fragment {
                         updating = false;
                     }
                 });
+    }
+
+    String getCategory(String category){
+        return category;
     }
 
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="게시판">
+        <item>Music</item>
+        <item>Reading</item>
+        <item>Travel</item>
+        <item>Exercise</item>
+        <item>TV</item>
+        <item>Movie</item>
+    </string-array>
+</resources>

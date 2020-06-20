@@ -21,13 +21,18 @@ import com.mobile.fm.exerciseboard.fragment.HomeFragment;
 public class MainActivity extends BasicActivity {
     private static final String TAG = "MainActivity";
 
+    private String category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        category = getIntent().getStringExtra("category");
         setContentView(R.layout.activity_main);
-        setToolbarTitle("Workout");
+
+        setToolbarTitle(category);
 
         init();
+
+
     }
 
     @Override
@@ -75,7 +80,8 @@ public class MainActivity extends BasicActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, homeFragment)
                 .commit();
-
+        Bundle bundle = new Bundle(); bundle.putString("category",category); //HomeFragment로 번들 전달
+        homeFragment.setArguments(bundle);
 
     }
 

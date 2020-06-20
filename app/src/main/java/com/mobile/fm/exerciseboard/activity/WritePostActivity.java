@@ -6,10 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -69,6 +72,7 @@ public class WritePostActivity extends BasicActivity {
     private EditText contentsEditText;
     private EditText titleEditText;
     private PostInfo postInfo;
+    private String category;
     private int pathCount, successCount;
 
     @Override
@@ -82,6 +86,10 @@ public class WritePostActivity extends BasicActivity {
         loaderLayout = findViewById(R.id.loaderLyaout);
         contentsEditText = findViewById(R.id.contentsEditText);
         titleEditText = findViewById(R.id.titleEditText);
+        postInfo = (PostInfo) getIntent().getSerializableExtra("postInfo");
+
+        final Spinner spinner= findViewById(R.id.spinner);
+
 
         findViewById(R.id.check).setOnClickListener(onClickListener);
         findViewById(R.id.image).setOnClickListener(onClickListener);
@@ -89,6 +97,18 @@ public class WritePostActivity extends BasicActivity {
         findViewById(R.id.imageModify).setOnClickListener(onClickListener);
         findViewById(R.id.videoModify).setOnClickListener(onClickListener);
         findViewById(R.id.delete).setOnClickListener(onClickListener);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
+                category = adapterView.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         buttonsBackgroundLayout.setOnClickListener(onClickListener);
@@ -104,8 +124,6 @@ public class WritePostActivity extends BasicActivity {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
-
-        postInfo = (PostInfo) getIntent().getSerializableExtra("postInfo");
         postInit();
     }
 
@@ -280,7 +298,7 @@ public class WritePostActivity extends BasicActivity {
                                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                         Map<String,Object> snap = task.getResult().getData();
                                                         uId = snap.get("username").toString();
-                                                        PostInfo postInfo = new PostInfo(title, contentsList, formatList, user.getUid(), date,uId);
+                                                        PostInfo postInfo = new PostInfo(title, contentsList,category, formatList, user.getUid(), date,uId);
                                                         storeUpload(documentReference, postInfo);
                                                     }
                                                 });
@@ -304,7 +322,7 @@ public class WritePostActivity extends BasicActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         Map<String,Object> snap = task.getResult().getData();
                         uId = snap.get("username").toString();
-                        storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date,uId));
+                        storeUpload(documentReference, new PostInfo(title, contentsList,category, formatList, user.getUid(), date,uId));
                     }
 
                 });
