@@ -99,6 +99,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dp"
             android:layout_margin="5dp"
             android:orientation="horizontal">
 
@@ -114,10 +115,12 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:layout_marginLeft="7dp"/>
         </LinearLayout>
 
         <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/userinfo_confirmbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
