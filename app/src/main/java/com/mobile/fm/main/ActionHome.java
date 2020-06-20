@@ -94,6 +94,8 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
     //background
     private LinearLayout bg;
     private ImageView bg_obj;
+    private TextView up;
+    private TextView down;
 
 
 
@@ -126,6 +128,8 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
         //bg
         bg=viewGroup.findViewById(R.id.background);
         bg_obj=viewGroup.findViewById(R.id.weather_obj);
+        up=viewGroup.findViewById(R.id.up);
+        down=viewGroup.findViewById(R.id.down);
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -318,21 +322,25 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
         }
         else if(21<=time && time<23){
             bg.setBackground(getResources().getDrawable(R.drawable.background_evening));
-            weather.setTextColor(0xFFFFFF);
-            max_temp.setTextColor(0xFFFFFF);
-            min_temp.setTextColor(0xFFFFFF);
-            locality.setTextColor(0xFFFFFF);
-            temperature.setTextColor(0xFFFFFF);
-            fragmentUsername.setTextColor(0xFFFFFF);
+            weather.setTextColor(0xFFFFFFFF);
+            max_temp.setTextColor(0xFFFFFFFF);
+            min_temp.setTextColor(0xFFFFFFFF);
+            locality.setTextColor(0xFFFFFFFF);
+            temperature.setTextColor(0xFFFFFFFF);
+            fragmentUsername.setTextColor(0xFFFFFFFF);
+            up.setTextColor(0xFFFFFFFF);
+            down.setTextColor(0xFFFFFFFF);
         }
         else {
             bg.setBackground(getResources().getDrawable(R.drawable.background_night));
-            weather.setTextColor(0xFFFFFF);
-            max_temp.setTextColor(0xFFFFFF);
-            min_temp.setTextColor(0xFFFFFF);
-            locality.setTextColor(0xFFFFFF);
-            temperature.setTextColor(0xFFFFFF);
-            fragmentUsername.setTextColor(0xFFFFFF);
+            weather.setTextColor(0xFFFFFFFF);
+            max_temp.setTextColor(0xFFFFFFFF);
+            min_temp.setTextColor(0xFFFFFFFF);
+            locality.setTextColor(0xFFFFFFFF);
+            temperature.setTextColor(0xFFFFFFFF);
+            fragmentUsername.setTextColor(0xFFFFFFFF);
+            up.setTextColor(0xFFFFFFFF);
+            down.setTextColor(0xFFFFFFFF);
 
         }
     }

@@ -104,6 +104,7 @@
                                 android:textColor="#363636"
                                 android:textSize="20sp"/>
                             <TextView
+                                android:id="@+id/up"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="▲"
@@ -117,6 +118,7 @@
                                 android:textColor="#363636"
                                 android:textSize="20sp"/>
                             <TextView
+                                android:id="@+id/down"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="#363636"
