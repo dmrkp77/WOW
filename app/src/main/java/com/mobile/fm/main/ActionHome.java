@@ -271,7 +271,7 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
                         curWeather=String.valueOf(repo.getWeather().get(0).getMain());
                         weather.setText(curWeather);
                         max_temp.setText(String.valueOf(Math.round(repo.getMain().getTempMax()-273.15))+"°C");
-                        max_temp.setText(String.valueOf(Math.round(repo.getMain().getTempMin()-273.15))+"°C");
+                        min_temp.setText(String.valueOf(Math.round(repo.getMain().getTempMin()-273.15))+"°C");
                         temperature.setText(String.valueOf(Math.round(repo.getMain().getTemp()-273.15))+"°C");
                     }
                     setBackground(curWeather,hour);
