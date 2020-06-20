@@ -98,26 +98,23 @@ public class WritePostActivity extends BasicActivity {
         findViewById(R.id.delete).setOnClickListener(onClickListener);
 
 
-        String getcat=getIntent().getStringExtra("category");// 스피너 초기값설정
-        if(getcat.equals("Music")){
-            spinner.setSelection(0);
+        String getcat = getIntent().getStringExtra("category");// 스피너 초기값설정
+        for(int i=0;i<=0;i++) {
+            if(getcat==null)continue;
+            if (getcat.equals("Music")) {
+                spinner.setSelection(0);
+            } else if (getcat.equals("Reading")) {
+                spinner.setSelection(1);
+            } else if (getcat.equals("Travel")) {
+                spinner.setSelection(2);
+            } else if (getcat.equals("Exercise")) {
+                spinner.setSelection(3);
+            } else if (getcat.equals("TV")) {
+                spinner.setSelection(4);
+            } else if (getcat.equals("Movie")) {
+                spinner.setSelection(5);
+            }
         }
-        else if(getcat.equals("Reading")){
-            spinner.setSelection(1);
-        }
-        else if(getcat.equals("Travel")){
-            spinner.setSelection(2);
-        }
-        else if(getcat.equals("Exercise")){
-            spinner.setSelection(3);
-        }
-        else if(getcat.equals("TV")){
-            spinner.setSelection(4);
-        }
-        else if(getcat.equals("Movie")){
-            spinner.setSelection(5);
-        }
-
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {// 스피너 Listener
             @Override
