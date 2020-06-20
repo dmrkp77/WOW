@@ -2,6 +2,7 @@ package com.mobile.fm.main;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
@@ -9,6 +10,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -18,6 +21,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +36,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.JsonObject;
 import com.mobile.fm.R;
 import com.mobile.fm.category.activity.CategoryMainActivity;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -58,14 +68,32 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
     private Button exercisebtn;
     private Button tvbtn;
     private Button moviebtn;
+    //location
+    private TextView locality;
 
     //weather
     LocationManager locationManager;
     TextView weather;
     TextView temperature;
+    TextView max_temp;
+    TextView min_temp;
     double lat, lon;
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES=1000;
     private static final long MIN_TIME_BW_UPDATES=1000*60*1;
+    private String curWeather="clear";
+
+    //time
+    long now = System.currentTimeMillis();
+    Date date = new Date(now);
+    // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+    SimpleDateFormat sdfNow = new SimpleDateFormat("hh");
+    // nowDate 변수에 값을 저장한다.
+    String sHour = sdfNow.format(date);
+    int hour= Integer.parseInt(sHour);
+
+    //background
+    private LinearLayout bg;
+    private ImageView bg_obj;
 
 
 
@@ -90,15 +118,25 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
         moviebtn = (Button) viewGroup.findViewById(R.id.moviebtn);
 
         weather=viewGroup.findViewById(R.id.weather);
+        max_temp=viewGroup.findViewById(R.id.max_temper);
+        min_temp=viewGroup.findViewById(R.id.min_temper);
         temperature=viewGroup.findViewById(R.id.temper);
         locationManager = (LocationManager) viewGroup.getContext().getSystemService(Context.LOCATION_SERVICE);
-
+        locality=viewGroup.findViewById(R.id.location);
+        //bg
+        bg=viewGroup.findViewById(R.id.background);
+        bg_obj=viewGroup.findViewById(R.id.weather_obj);
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
         docRef = db.collection("User").document(firebaseUser.getEmail());
 
+
+        //날씨가져오기.
+        if (locationManager != null) {
+            requestLocation();
+        }
 
         //ClickListener 처리
         musicbtn.setOnClickListener(this);
@@ -114,7 +152,7 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             Log.d("mingyu",documentSnapshot.getString("username"));
-                            fragmentUsername.setText(documentSnapshot.getString("username"));
+                            fragmentUsername.setText("Hello "+documentSnapshot.getString("username"));
 
                         } else {
                             Toast.makeText(activity.getApplicationContext(), "No Nickname", Toast.LENGTH_SHORT).show();
@@ -129,11 +167,6 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
                     }
                 });
 
-        //날씨가져오기.
-
-        if (locationManager != null) {
-            requestLocation();
-        }
 
         return viewGroup;
     }
@@ -217,6 +250,7 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
     }
 
     private void getWeather(double latitude, double longitude) {
+        setLocation(latitude, longitude);
         Retrofit retrofit = new Retrofit.Builder().baseUrl(ApiService.API_URL).addConverterFactory(GsonConverterFactory.create()).build();
         ApiService apiService = retrofit.create(ApiService.class);
         Call<WeatherRepo> call = apiService.getWeather(latitude, longitude, ApiService.APPKEY);
@@ -230,9 +264,13 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
                     WeatherRepo repo = response.body();
                     if (repo != null) {
                         //데이터가 null 이 아니라면 날씨 데이터를 텍스트뷰로 보여주기
-                        weather.setText(String.valueOf(repo.getWeather().get(0).getMain()));
+                        curWeather=String.valueOf(repo.getWeather().get(0).getMain());
+                        weather.setText(curWeather);
+                        max_temp.setText(String.valueOf(Math.round(repo.getMain().getTempMax()-273.15))+"°C");
+                        max_temp.setText(String.valueOf(Math.round(repo.getMain().getTempMin()-273.15))+"°C");
                         temperature.setText(String.valueOf(Math.round(repo.getMain().getTemp()-273.15))+"°C");
                     }
+                    setBackground(curWeather,hour);
                 }
             }
             @Override
@@ -241,7 +279,61 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
             }
         });
     }
+    private void setLocation(double latitude, double longitude){
+        final Geocoder geocoder = new Geocoder(getContext());
+        List<Address> list = null;
+        try {
+            list = geocoder.getFromLocation(
+                    latitude, // 위도
+                    longitude, // 경도
+                    10); // 얻어올 값의 개수
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+        }
+        if (list != null) {
+            if (list.size() == 0) {
+                locality.setText("해당되는 주소 정보가 없습니다");
+            } else {
+                locality.setText(list.get(0).getLocality());
+            }
+        }
+    }
+    private void setBackground(String nowWeather, int time){
+        if(nowWeather.equals("Drizzle") || nowWeather.equals("Rain") || nowWeather.equals("Thunderstorm") || nowWeather.equals("Snow")){
+            bg_obj.setImageResource(R.drawable.rain);
+        }
+        else if(nowWeather.equals("Clear")){
+            bg_obj.setImageResource(R.drawable.sun);
+        }
+        else {
+            bg_obj.setImageResource(R.drawable.clouds);
+        }
 
+        if((6<=time && time<9) || (19<=time && time<21)){
+            bg.setBackground(getResources().getDrawable(R.drawable.background_sunny));
+        }
+        else if(9<=time && time<=18){
+            bg.setBackground(getResources().getDrawable(R.drawable.background_clear_sky));
+        }
+        else if(21<=time && time<23){
+            bg.setBackground(getResources().getDrawable(R.drawable.background_evening));
+            weather.setTextColor(0xFFFFFF);
+            max_temp.setTextColor(0xFFFFFF);
+            min_temp.setTextColor(0xFFFFFF);
+            locality.setTextColor(0xFFFFFF);
+            temperature.setTextColor(0xFFFFFF);
+            fragmentUsername.setTextColor(0xFFFFFF);
+        }
+        else {
+            bg.setBackground(getResources().getDrawable(R.drawable.background_night));
+            weather.setTextColor(0xFFFFFF);
+            max_temp.setTextColor(0xFFFFFF);
+            min_temp.setTextColor(0xFFFFFF);
+            locality.setTextColor(0xFFFFFF);
+            temperature.setTextColor(0xFFFFFF);
+            fragmentUsername.setTextColor(0xFFFFFF);
 
-
+        }
+    }
 }
