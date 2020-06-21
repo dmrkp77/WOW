@@ -25,7 +25,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CustomVi
     }
     @Override
     public CommentAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_square_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.board_comment, parent, false);
         CommentAdapter.CustomViewHolder holder = new CommentAdapter.CustomViewHolder(view);
         //새로 생성된 뷰홀더 객체를 리턴하는데 , 뷰 객체를 담아서 리턴한다.
         return holder;

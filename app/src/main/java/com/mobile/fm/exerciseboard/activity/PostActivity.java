@@ -99,8 +99,8 @@ public class PostActivity extends BasicActivity {
         if(commentList.size()==0)date =" ";
         else date = commentList.get(commentList.size() - 1).getCreatedAt();
         CollectionReference collectionReference = firebaseFirestore.collection("posts").document(postId).collection("comments");
-        collectionReference.orderBy("createdAt", Query.Direction.DESCENDING).whereLessThan("createdAt", date).limit(10).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//        collectionReference.orderBy("createdAt", Query.Direction.DESCENDING).whereLessThan("createdAt", date).limit(10).get()
+                collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
@@ -112,7 +112,7 @@ public class PostActivity extends BasicActivity {
                                     commentList.add(new CommentListItem(
                                             document.getData().get("username").toString(),
                                             new Date(document.getDate("createdAt").getTime()).toString(),
-                                            document.getData().get("body").toString()));
+                                            document.getData().get("comments").toString()));
                             }
                            // adapter.notifyDataSetChanged();
                         } else {
@@ -125,7 +125,7 @@ public class PostActivity extends BasicActivity {
         recyclerView.setAdapter(adapter);//게시판 리사이클러 뷰의 어댑터 연결
     }
 
-    //댓글 추가 액션(데베 올리기)
+    //댓글 추가 (데베 올리기)
     public void addCommentTextClicked(View view) {
         final String commentTxt = enterCommentText.getText().toString();
         postRef = FirebaseFirestore.getInstance().collection("posts").document(postId);
