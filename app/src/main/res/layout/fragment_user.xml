@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,7 +99,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="25dp"
                         android:padding="20dp"
                         android:src="@drawable/personinfo" />
 
@@ -108,9 +109,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
-                        android:layout_marginTop="5dp"
-                        android:text="User Information"
+                        android:text="User\nInformation"
                         android:textColor="#5e5e5e"
+                        android:gravity="center"
                         android:textSize="16dp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
