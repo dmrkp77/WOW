@@ -15,7 +15,7 @@ public class PostInfo implements Serializable {
     private String nid;//유저 닉네임
     private String id;//문서 이름(파이어베이스 문서 이름)
     private String boardSelect="Music";
-    private int numComments=0;
+    private Long numComments;
 
     public PostInfo(String title, ArrayList<String> contents,String boardSelect, ArrayList<String> formats, String publisher, Date createdAt,String id, String nid){
         this.title = title;
@@ -46,7 +46,7 @@ public class PostInfo implements Serializable {
         this.id = id;
     }
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id,String nid,String boardSelect){
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id,String nid,String boardSelect,Long numComments){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
@@ -55,6 +55,17 @@ public class PostInfo implements Serializable {
         this.nid = nid;
         this.id = id;
         this.boardSelect=boardSelect;
+        this.numComments=numComments;
+    }
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt,String nid,String boardSelect,Long numComments){
+        this.title = title;
+        this.contents = contents;
+        this.formats = formats;
+        this.publisher = publisher;
+        this.createdAt = createdAt;
+        this.nid = nid;
+        this.boardSelect=boardSelect;
+        this.numComments=numComments;
     }
 
 
@@ -122,10 +133,10 @@ public class PostInfo implements Serializable {
     public void setBoardSelect(String boardSelect) {
         this.boardSelect = boardSelect;
     }
-    public int getNumComments() {
+    public Long getNumComments() {
         return numComments;
     }
-    public void setNumComments(int numComments) {
+    public void setNumComments(Long numComments) {
         this.numComments = numComments;
     }
 }

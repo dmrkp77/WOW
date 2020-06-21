@@ -183,7 +183,9 @@ public class CategoryMainActivity  extends AppCompatActivity implements View.OnC
                                             new Date(document.getDate("createdAt").getTime()),
                                             document.getId(),
                                             document.getData().get("nid").toString(),
-                                            category_name)
+                                            category_name,
+                                            (Long) document.getData().get("numComments")
+                                            )
                                     );
                                 }
                             }

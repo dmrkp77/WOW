@@ -345,7 +345,7 @@ public class WritePostActivity extends BasicActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         Map<String,Object> snap = task.getResult().getData();
                         uId = snap.get("username").toString();
-                        storeUpload(documentReference, new PostInfo(title, contentsList,category, formatList, user.getUid(), date,uId));
+                        storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date,uId,category, (long) 0));
                     }
 
                 });

@@ -96,6 +96,7 @@ public class CategoryBoardAdapter extends RecyclerView.Adapter<CategoryBoardAdap
         }
 
         holder.time.setText(time);
+        holder.commentNumber.setText(arrayList.get(position).getNumComments().toString());
     }
 
     @Override
