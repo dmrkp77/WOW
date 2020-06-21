@@ -32,8 +32,6 @@ import com.mobile.fm.exerciseboard.activity.WritePostActivity;
 public class LoginActivity extends AppCompatActivity {
     //define view objects
 
-//    private BackPressHandler backPressHandler = new BackPressHandler(this);
-
 //    String id, pw;
     private CheckBox saveIdPassword;
     private EditText editTextEmail;
@@ -201,13 +199,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
-//    //뒤로가기 2번클릭 앱종료 기능 구현
-//    @Override
-//    public void onBackPressed() {
-//        // Toast 메세지 사용자 지정
-//        backPressHandler.onBackPressed("뒤로가기 버튼 한번 더 누르면 종료");
-//    }
-
     private long backKeyPressedTime = 0;
     private Toast toast;
 
@@ -222,18 +213,4 @@ public class LoginActivity extends AppCompatActivity {
             toast.cancel();
             }
     }
-//
-//    public void onBackPressed(String msg) {
-//        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
-//            backKeyPressedTime = System.currentTimeMillis();
-//            showGuide(msg);
-//            return;
-//        }
-//        if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
-//            activity.finish();
-//            toast.cancel();
-//        }
-//    }
 }
-
-// 출처: https://yonoo88.tistory.com/1360 [yonoo's]

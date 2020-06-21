@@ -259,7 +259,6 @@ public class ActionHome extends Fragment implements View.OnClickListener, Locati
         ApiService apiService = retrofit.create(ApiService.class);
         Call<WeatherRepo> call = apiService.getWeather(latitude, longitude, ApiService.APPKEY);
 
-
         call.enqueue(new Callback<WeatherRepo>() {
             @Override
             public void onResponse(@NonNull Call<WeatherRepo> call, @NonNull Response<WeatherRepo> response) {
