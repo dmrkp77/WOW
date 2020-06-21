@@ -98,7 +98,7 @@ public class PostActivity extends BasicActivity {
         String date;
         if(commentList.size()==0)date =" ";
         else date = commentList.get(commentList.size() - 1).getCreatedAt();
-        CollectionReference collectionReference = firebaseFirestore.collection("posts").document(postId).collection("comments");
+      CollectionReference collectionReference = firebaseFirestore.collection("posts").document(postId).collection("comments");
 //        collectionReference.orderBy("createdAt", Query.Direction.DESCENDING).whereLessThan("createdAt", date).limit(10).get()
                 collectionReference.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -114,7 +114,7 @@ public class PostActivity extends BasicActivity {
                                             new Date(document.getDate("createdAt").getTime()).toString(),
                                             document.getData().get("comments").toString()));
                             }
-                           // adapter.notifyDataSetChanged();
+                           adapter.notifyDataSetChanged();
                         } else {
 
                         }
