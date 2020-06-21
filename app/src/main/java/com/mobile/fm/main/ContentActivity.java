@@ -122,11 +122,11 @@ public class ContentActivity extends AppCompatActivity {
                                 return true;
                             }
 
-                            case R.id.action_bookmark: {
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.content_layout, actionBookmark).commitAllowingStateLoss();
-                                return true;
-                            }
+//                            case R.id.action_bookmark: {
+//                                getSupportFragmentManager().beginTransaction()
+//                                        .replace(R.id.content_layout, actionBookmark).commitAllowingStateLoss();
+//                                return true;
+//                            }
 
                             case R.id.action_user: {
                                 getSupportFragmentManager().beginTransaction()
@@ -154,7 +154,9 @@ public class ContentActivity extends AppCompatActivity {
             } else {
                 finish(); //액티비티 종료
             }
-        } else if (R.id.action_search == seletedItemId || R.id.action_bookmark == seletedItemId || R.id.action_user == seletedItemId) {
+        } else if (R.id.action_search == seletedItemId ||
+//               R.id.action_bookmark == seletedItemId ||
+                 R.id.action_user == seletedItemId) {
             manager.beginTransaction().replace(R.id.content_layout, actionHome).commitAllowingStateLoss();
             bottomNavigationView.setSelectedItemId(R.id.action_home);
         } else {
