@@ -37,10 +37,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText editTextPassword;
     private EditText editTextUsername;
     private TextView textviewLogin;
+    // TextView textviewMessage;
     private Button buttonSignup;
-
-
-    //    TextView textviewMessage;
     private ProgressDialog progressDialog;
 
     //define firebase object
@@ -111,9 +109,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             String username = editTextUsername.getText().toString().trim();
                             firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-//                            final Date date =  !postInfo == null ? new Date() : postInfo.getCreatedAt();
-//                            long now = System.currentTimeMillis();
-//                            Date date = new Date(now);
+
                             final Date date = new Date();
                             SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy.MM.dd    HH:mm:ss");
                             String formatDate = sdfNow.format(date);
