@@ -74,6 +74,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MainViewHo
             public void onClick(View v) {
                 Intent intent = new Intent(activity, PostActivity.class);
                 intent.putExtra("postInfo", mDataset.get(mainViewHolder.getAdapterPosition()));
+                intent.putExtra("postId", mDataset.get(mainViewHolder.getAdapterPosition()).getId());
                 activity.startActivity(intent);
             }
         });
@@ -155,6 +156,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MainViewHo
     private void myStartActivity(Class c, PostInfo postInfo) {
         Intent intent = new Intent(activity, c);
         intent.putExtra("postInfo", postInfo);
+        intent.putExtra("postId", postInfo.getId());
         activity.startActivity(intent);
     }
 

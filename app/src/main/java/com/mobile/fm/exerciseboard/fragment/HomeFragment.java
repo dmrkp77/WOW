@@ -175,6 +175,7 @@ public class HomeFragment extends Fragment {
                                     postList.add(new PostInfo(
                                             document.getData().get("title").toString(),
                                             (ArrayList<String>) document.getData().get("contents"),
+                                            document.getData().get("boardSelect").toString(),
                                             (ArrayList<String>) document.getData().get("formats"),
                                             document.getData().get("publisher").toString(),
                                             new Date(document.getDate("createdAt").getTime()),

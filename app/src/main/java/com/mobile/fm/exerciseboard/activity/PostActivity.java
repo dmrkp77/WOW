@@ -264,6 +264,7 @@ public class PostActivity extends BasicActivity {
 
     private void myStartActivity(Class c, PostInfo postInfo) {
         Intent intent = new Intent(this, c);
+        intent.putExtra("category",postInfo.getBoardSelect());
         intent.putExtra("postInfo", postInfo);
         startActivityForResult(intent, 0);
     }

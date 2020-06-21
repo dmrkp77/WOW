@@ -38,6 +38,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
     private final int MORE_INDEX = 2;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private String category;
 
     static class MainViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -67,6 +68,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
     @Override
     public HomeAdapter.MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post, parent, false);
+
         final MainViewHolder mainViewHolder = new MainViewHolder(cardView);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +133,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
                     case R.id.modify:
                         if(mDataset.get(position).getPublisher().equals(firebaseUser.getUid())) {
 //                            Intent intent= new Intent(activity, WritePostActivity.class);
-//                            intent.putExtra("category",category_name);
+//                            intent.putExtra("category",category);
                             myStartActivity(WritePostActivity.class, mDataset.get(position));
                         }else{
                             Toast.makeText(activity, "수정 권한이 없습니다.", Toast.LENGTH_SHORT).show();

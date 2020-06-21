@@ -17,6 +17,16 @@ public class PostInfo implements Serializable {
     private String boardSelect;
     private int numComments=0;
 
+    public PostInfo(String title, ArrayList<String> contents,String boardSelect, ArrayList<String> formats, String publisher, Date createdAt,String id, String nid){
+        this.title = title;
+        this.contents = contents;
+        this.formats = formats;
+        this.publisher = publisher;
+        this.createdAt = createdAt;
+        this.id = id;
+        this.nid = nid;
+        this.boardSelect = boardSelect;
+    }
     public PostInfo(String title, ArrayList<String> contents,String boardSelect, ArrayList<String> formats, String publisher, Date createdAt, String nid){
         this.title = title;
         this.contents = contents;
