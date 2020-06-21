@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DDD"
+    android:background="@drawable/background_sunny"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -14,613 +15,331 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:background="#FFF">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Today"
-                    android:textColor="#5e5e5e"
-                    android:textSize="24sp"/>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="6dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/bg_view" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFF"
-                android:layout_marginBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="What will you do?"
-                    android:textColor="#5e5e5e"
-                    android:textSize="18sp" />
-
-                <androidx.cardview.widget.CardView
-                    android:elevation="0dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                <LinearLayout
+                    android:id="@+id/intro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="5dp"
-                    android:outlineAmbientShadowColor="#AAA"
-                    android:outlineSpotShadowColor="#AAA"
-                    >
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="190dp"
-                        android:src="@drawable/sky"
-                        android:scaleType="fitXY"
-                        />
+                    android:orientation="vertical"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/fragmentHome_UserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hello Guys!"
+                        android:textColor="#363636"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/weather"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sunny day"
+                        android:textColor="#363636"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/weather_obj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/sun"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/weather_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:paddingRight="40dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/intro"
+                    app:layout_constraintVertical_bias="0.366">
+
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
+                        android:gravity="right">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/temper"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
+                            android:text="21 C"
+                            android:textColor="#363636"
+                            android:textSize="55sp"
+                            android:paddingVertical="0dp"/>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="-13dp"
+                            >
                             <TextView
+                                android:id="@+id/max_temper"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Good Morning!"
-                                android:textColor="#ffff"
-                                android:textSize="18dp"
-                                android:shadowRadius="3.0"
-                                android:shadowDx="2.0"
-                                android:shadowDy="2.0"
-                                android:shadowColor="#000000"/>
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
+                                android:text="24c"
+                                android:textColor="#363636"
+                                android:textSize="20sp"/>
                             <TextView
-                                android:id="@+id/fragmentHome_UserName"
+                                android:id="@+id/up"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""
-                                android:textColor="#ffff"
-                                android:textSize="24sp"
-                                android:shadowRadius="3.0"
-                                android:shadowDx="2.0"
-                                android:shadowDy="2.0"
-                                android:shadowColor="#000000"/>
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:text="21 C"
-                                    android:textColor="#ffff"
-                                    android:textSize="18sp"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-
-                            </RelativeLayout>
+                                android:text="▲"
+                                android:textColor="#363636"
+                                android:layout_marginRight="10dp"/>
+                            <TextView
+                                android:id="@+id/min_temper"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="21c"
+                                android:textColor="#363636"
+                                android:textSize="20sp"/>
+                            <TextView
+                                android:id="@+id/down"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#363636"
+                                android:text="▼"/>
                         </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/location"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="40dp"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Sun"
-                                    android:textColor="#ffff"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="20 C"
-                                    android:textColor="#ffff"
-                                    android:textSize="18sp"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Mon"
-                                    android:textColor="#ffff"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="20 C"
-                                    android:textColor="#ffff"
-                                    android:textSize="18sp"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Tue"
-                                    android:textColor="#ffff"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="20 C"
-                                    android:textColor="#ffff"
-                                    android:textSize="18sp"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Wed"
-                                    android:textColor="#ffff"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="20 C"
-                                    android:textColor="#ffff"
-                                    android:textSize="18sp"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Thu"
-                                    android:textColor="#ffff"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="20 C"
-                                    android:textColor="#ffff"
-                                    android:textSize="18sp"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Fri"
-                                    android:textColor="#ffff"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="20 C"
-                                    android:textColor="#ffff"
-                                    android:textSize="18sp"
-                                    android:shadowRadius="3.0"
-                                    android:shadowDx="2.0"
-                                    android:shadowDy="2.0"
-                                    android:shadowColor="#000000"/>
-                            </LinearLayout>
-                        </LinearLayout>
+                            android:text="거창"
+                            android:textColor="#363636"
+                            android:textSize="20sp" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#FFF">
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Start new vacation"
-                    android:textColor="#5e5e5e"
                     android:layout_marginLeft="15dp"
-                    android:textSize="24sp" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Start new vacation"
+                    android:textColor="#3e3e3e"
+                    android:textSize="30sp" />
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp"
-                        android:layout_marginHorizontal="15dp"
-                        android:layout_marginVertical="8dp"
-                        android:outlineAmbientShadowColor="#fff"
-                        >
-
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:outlineAmbientShadowColor="#fff"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="20dp"
+                    android:layout_marginBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                         <Button
                             android:id="@+id/musicbtn"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null"
-                           />
+                            android:background="@drawable/bg_music"
+                            android:gravity="center_vertical|left"
+                            android:paddingHorizontal="25dp"
+                            android:text="Music"
+                            android:textColor="#363636"
+                            android:textSize="25sp" />
 
-                        <RelativeLayout
-                            android:id="@+id/musicLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@drawable/music2"
+                    </LinearLayout>
 
-                            >
+                    <ImageView
+                        android:src="@drawable/music_obj2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitEnd"/>
+                </androidx.cardview.widget.CardView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginRight="0dp"
-                                android:layout_marginBottom="-5dp"
-                                android:text="Music"
-                                android:shadowRadius="3.0"
-                                android:shadowDx="2.0"
-                                android:shadowDy="2.0"
-                                android:shadowColor="#000000"
-
-                                android:textColor="#FFF"
-                                android:textSize="25sp" />
-
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginVertical="8dp"
-                        android:outlineAmbientShadowColor="#fff">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@drawable/reading2">
-
-                            <Button
-                                android:id="@+id/readingbtn"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@null" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginRight="0dp"
-                                android:layout_marginBottom="-5dp"
-                                android:text="Reading"
-                                android:shadowRadius="3.0"
-                                android:shadowDx="2.0"
-                                android:shadowDy="2.0"
-                                android:shadowColor="#000000"
-
-                                android:textColor="#FFF"
-                                android:textSize="25sp" />
-
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:outlineAmbientShadowColor="#fff"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="20dp"
+                    android:layout_marginBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp"
-                        android:layout_marginHorizontal="15dp"
-                        android:layout_marginVertical="8dp"
-                        android:outlineAmbientShadowColor="#fff">
+                        <Button
+                            android:id="@+id/readingbtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_reading"
+                            android:gravity="center_vertical|left"
+                            android:paddingHorizontal="25dp"
+                            android:text="Reading"
+                            android:textColor="#363636"
+                            android:textSize="25sp" />
+                    </LinearLayout>
+                    <ImageView
+                        android:src="@drawable/reading_obj2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitEnd"/>
 
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:outlineAmbientShadowColor="#fff"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="20dp"
+                    android:layout_marginBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                         <Button
                             android:id="@+id/travelbtn"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null" />
+                            android:background="@drawable/bg_travel"
+                            android:gravity="center_vertical|left"
+                            android:paddingHorizontal="25dp"
+                            android:text="Travel"
+                            android:textColor="#363636"
+                            android:textSize="25sp" />
+                    </LinearLayout>
+                    <ImageView
+                        android:src="@drawable/travel_obj1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitEnd"/>
+                </androidx.cardview.widget.CardView>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@drawable/travel2">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginRight="0dp"
-                                android:layout_marginBottom="-5dp"
-                                android:text="Travel"
-                                android:shadowRadius="3.0"
-                                android:shadowDx="2.0"
-                                android:shadowDy="2.0"
-                                android:shadowColor="#000000"
-
-                                android:textColor="#FFF"
-                                android:textSize="25sp" />
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginVertical="8dp"
-                        android:outlineAmbientShadowColor="#fff">
-
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:outlineAmbientShadowColor="#fff"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="20dp"
+                    android:layout_marginBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                         <Button
                             android:id="@+id/exercisebtn"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null" />
+                            android:background="@drawable/bg_exercise"
+                            android:gravity="center_vertical|left"
+                            android:paddingHorizontal="25dp"
+                            android:text="Work out"
+                            android:textColor="#363636"
+                            android:textSize="25sp" />
+                    </LinearLayout>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@drawable/exercising">
+                    <ImageView
+                        android:src="@drawable/workout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitEnd"/>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginRight="0dp"
-                                android:layout_marginBottom="-5dp"
-                                android:text="Work out"
-                                android:shadowRadius="3.0"
-                                android:shadowDx="2.0"
-                                android:shadowDy="2.0"
-                                android:shadowColor="#000000"
+                </androidx.cardview.widget.CardView>
 
-                                android:textColor="#FFF"
-                                android:textSize="25sp" />
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp"
-                        android:layout_marginHorizontal="15dp"
-                        android:layout_marginVertical="8dp"
-                        android:outlineAmbientShadowColor="#fff"
-                        android:outlineSpotShadowColor="#333">
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:outlineAmbientShadowColor="#fff"
+                    android:outlineSpotShadowColor="#333"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="20dp"
+                    android:layout_marginBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                         <Button
                             android:id="@+id/tvbtn"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null" />
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@drawable/tv2">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginRight="0dp"
-                                android:layout_marginBottom="-5dp"
-                                android:shadowColor="#000000"
-                                android:shadowDx="2.0"
-                                android:shadowDy="2.0"
-                                android:shadowRadius="3.0"
-                                android:text="TV"
-
-                                android:textColor="#FFF"
-                                android:textSize="25sp" />
+                            android:background="@drawable/bg_tv"
+                            android:gravity="center_vertical|left"
+                            android:paddingHorizontal="25dp"
+                            android:text="TV"
+                            android:textColor="#363636"
+                            android:textSize="25sp" />
+                    </LinearLayout>
 
 
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:src="@drawable/tv_obj"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitEnd"/>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="160dp"
-                        android:layout_height="120dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp"
-                        android:layout_marginRight="15dp"
-                        android:layout_marginLeft="7dp"
-                        android:layout_marginVertical="8dp"
-                        android:outlineAmbientShadowColor="#fff">
+                </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:outlineAmbientShadowColor="#fff"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="20dp"
+                    android:layout_marginBottom="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                         <Button
                             android:id="@+id/moviebtn"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null" />
+                            android:background="@drawable/bg_movie"
+                            android:gravity="center_vertical|left"
+                            android:paddingHorizontal="25dp"
+                            android:text="Movie"
+                            android:textColor="#363636"
+                            android:textSize="25sp" />
+                    </LinearLayout>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:background="@drawable/movie2">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_alignParentBottom="true"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginRight="0dp"
-                                android:layout_marginBottom="-5dp"
-                                android:text="Movie"
-                                android:shadowRadius="3.0"
-                                android:shadowDx="2.0"
-                                android:shadowDy="2.0"
-                                android:shadowColor="#000000"
-
-                                android:textColor="#FFF"
-                                android:textSize="25sp" />
-
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
-                </LinearLayout>
+                    <ImageView
+                        android:src="@drawable/movie_obj"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitEnd"/>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
