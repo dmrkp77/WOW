@@ -37,7 +37,7 @@ public class CategoryBoardAdapter extends RecyclerView.Adapter<CategoryBoardAdap
         this.arrayList = arrayList;
         this.activity = activity;
 
-        firebaseHelper = new FirebaseHelper(activity);
+     //   firebaseHelper = new FirebaseHelper(activity);
     }
 
     @NonNull
@@ -49,7 +49,7 @@ public class CategoryBoardAdapter extends RecyclerView.Adapter<CategoryBoardAdap
         //새로 생성된 뷰홀더 객체를 리턴하는데 , 뷰 객체를 담아서 리턴한다.
         final CategoryBoardAdapter.CustomViewHolder customViewHolder = new CategoryBoardAdapter.CustomViewHolder(view);
 
-        return holder;
+        return customViewHolder;
     }
 
 
@@ -142,7 +142,7 @@ public class CategoryBoardAdapter extends RecyclerView.Adapter<CategoryBoardAdap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos=getAdapterPosition();
+                    int pos=getAdapterPosition(); //이부분이 안먹힘
                     if (pos != RecyclerView.NO_POSITION) {
                         Intent intent = new Intent(activity, PostActivity.class);
                         intent.putExtra("postInfo", arrayList.get(pos));

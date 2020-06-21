@@ -46,6 +46,7 @@ public class CategoryMainActivity  extends AppCompatActivity implements View.OnC
     private RecyclerView recyclerView;
     private RecyclerView boardRecyclerView;
     private CategoryRecommendationsAdapter adapter;
+    private CategoryBoardAdapter badapter;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.LayoutManager BlayoutManager;
     private ArrayList<Long> NumList;
@@ -59,7 +60,7 @@ public class CategoryMainActivity  extends AppCompatActivity implements View.OnC
     private FirebaseFirestore firebaseFirestore;
     private CategoryBoardAdapter categoryBoardAdapter;
     private ArrayList<PostInfo> postList;
-
+    private Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -190,8 +191,20 @@ public class CategoryMainActivity  extends AppCompatActivity implements View.OnC
                         updating = false;
                     }
                 });
-        categoryBoardAdapter = new CategoryBoardAdapter(this,postList );
+        categoryBoardAdapter = new CategoryBoardAdapter(this,postList);
+
+//        categoryBoardAdapter.setOnItemClickListener(new CategoryBoardAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View v, int position) {
+//                Intent intent = new Intent(activity, PostActivity.class);
+//                intent.putExtra("postInfo", postList.get(position));
+//                activity.startActivity(intent);
+//            }
+//        });
         boardRecyclerView.setAdapter(categoryBoardAdapter);//게시판 리사이클러 뷰의 어댑터 연결
+
+        ListDecoration Bdecoration = new ListDecoration();
+        boardRecyclerView.addItemDecoration(Bdecoration);
 
     }
 
