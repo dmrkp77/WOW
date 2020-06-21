@@ -13,30 +13,36 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.core.Tag;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
-import com.google.protobuf.Any;
 import com.mobile.fm.R;
-import com.mobile.fm.category.activity.CategoryMainActivity;
-import com.mobile.fm.category.activity.RecommendationsActivity;
+import com.mobile.fm.category.adapter.CategoryBoardAdapter;
+import com.mobile.fm.exerciseboard.CommentListItem;
 import com.mobile.fm.exerciseboard.FirebaseHelper;
 import com.mobile.fm.exerciseboard.PostInfo;
+import com.mobile.fm.exerciseboard.adapter.CommentAdapter;
 import com.mobile.fm.exerciseboard.listener.OnPostListener;
 import com.mobile.fm.exerciseboard.view.ReadContentsVIew;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -55,6 +61,11 @@ public class PostActivity extends BasicActivity {
     private FirebaseDatabase database;
     private DocumentReference postRef;
     private DocumentReference commentRef;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private CommentAdapter adapter;
+    private ArrayList<CommentListItem> commentList;
+    private boolean updating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +77,55 @@ public class PostActivity extends BasicActivity {
         addCommentText = findViewById(R.id.addCommentText);
         enterCommentText = findViewById(R.id.enterCommentText);
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        commentList = new ArrayList<>();
         firebaseHelper = new FirebaseHelper(this);
         firebaseHelper.setOnPostListener(onPostListener);
         uiUpdate();
+
+        init_comment();
+
+
+    }
+    //댓글 가져오기
+    private void init_comment(){
+        recyclerView =findViewById(R.id.recyclerPostComments);
+        recyclerView.setHasFixedSize(true);//리사이클러뷰 기존 성능 강화;
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        final Boolean clear=true;
+        updating = true;
+        String date;
+        if(commentList.size()==0)date =" ";
+        else date = commentList.get(commentList.size() - 1).getCreatedAt();
+        CollectionReference collectionReference = firebaseFirestore.collection("posts").document(postId).collection("comments");
+        collectionReference.orderBy("createdAt", Query.Direction.DESCENDING).whereLessThan("createdAt", date).limit(10).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (clear) {
+                               commentList.clear();
+                            }
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                    commentList.add(new CommentListItem(
+                                            document.getData().get("username").toString(),
+                                            new Date(document.getDate("createdAt").getTime()).toString(),
+                                            document.getData().get("body").toString()));
+                            }
+                           // adapter.notifyDataSetChanged();
+                        } else {
+
+                        }
+                        updating = false;
+                    }
+                });
+        adapter = new CommentAdapter(commentList ,this);
+        recyclerView.setAdapter(adapter);//게시판 리사이클러 뷰의 어댑터 연결
     }
 
+    //댓글 추가 액션(데베 올리기)
     public void addCommentTextClicked(View view) {
         final String commentTxt = enterCommentText.getText().toString();
         postRef = FirebaseFirestore.getInstance().collection("posts").document(postId);
