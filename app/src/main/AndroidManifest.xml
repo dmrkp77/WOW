@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".login.LoginActivity"></activity>
         <activity android:name=".main.search.SearchPostActivity" /> <!-- <activity android:name="com.mobile.fm.main.ActionBookmark"></activity> -->
         <!-- <activity android:name="com.mobile.fm.main.ActionUser" /> -->
         <!-- <activity android:name="com.mobile.fm.main.ActionSearch" /> -->
@@ -32,7 +33,7 @@
         <activity android:name=".main.userinfo.UserInfoActivity" />
         <activity android:name=".category.activity.CategoryMainActivity" />
         <activity android:name=".category.activity.RecommendationsActivity" />
-        <activity android:name=".login.LoginActivity">
+        <activity android:name=".login.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
