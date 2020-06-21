@@ -16,6 +16,7 @@
         android:layout_marginTop="5dp"
         android:textStyle="bold"
         android:textSize="18dp"
+        android:textColor="#363636"
         android:text="제목" />
 
     <TextView
@@ -27,6 +28,7 @@
         android:maxLines="1"
         android:maxLength="20"
         android:textSize="15dp"
+        android:textColor="#363636"
         android:text="내용" />
 
     <LinearLayout

@@ -71,10 +71,12 @@ public class PostActivity extends BasicActivity {
     private FirebaseUser user;
     private String uId;
     private boolean updating;
+    private String category;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        category=getIntent().getStringExtra("category");
         postId=getIntent().getStringExtra("postId");
         postInfo = (PostInfo) getIntent().getSerializableExtra("postInfo");
         contentsLayout = findViewById(R.id.contentsLayout);
@@ -258,7 +260,7 @@ public class PostActivity extends BasicActivity {
     };
 
     private void uiUpdate(){
-        setToolbarTitle(postInfo.getTitle());
+        setToolbarTitle(postInfo.getTitle(), category );
         readContentsVIew.setPostInfo(postInfo);
     }
 

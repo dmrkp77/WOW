@@ -79,7 +79,6 @@ public class WritePostActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_post);
-        setToolbarTitle("게시글 작성");
         parent = findViewById(R.id.contentsLayout);
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
         loaderLayout = findViewById(R.id.loaderLyaout);
@@ -131,6 +130,8 @@ public class WritePostActivity extends BasicActivity {
 
             }
         });
+
+        setToolbarTitle("게시글 작성", getcat);
 
 
         buttonsBackgroundLayout.setOnClickListener(onClickListener);

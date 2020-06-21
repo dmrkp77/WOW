@@ -28,7 +28,7 @@ public class MainActivity extends BasicActivity {
         category = getIntent().getStringExtra("category");
         setContentView(R.layout.activity_main);
 
-        setToolbarTitle(category);
+        setToolbarTitle(category,category);
 
         init();
 

@@ -145,6 +145,7 @@ public class CategoryBoardAdapter extends RecyclerView.Adapter<CategoryBoardAdap
                     int pos=getAdapterPosition(); //이부분이 안먹힘
                     if (pos != RecyclerView.NO_POSITION) {
                         Intent intent = new Intent(activity, PostActivity.class);
+                        intent.putExtra("category",arrayList.get(pos).getBoardSelect());
                         intent.putExtra("postInfo", arrayList.get(pos));
                         intent.putExtra("postId",arrayList.get(pos).getId());
 

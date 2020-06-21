@@ -3,4 +3,10 @@
     <color name="colorPrimary">#f1d1d1</color>
     <color name="colorPrimaryDark">#7d5a5a</color>
     <color name="colorAccent">#f3a1a1</color>
+    <color name="Music">#ffddff</color>
+    <color name="Reading">#ddffdd</color>
+    <color name="Travel">#ddddff</color>
+    <color name="Exercise">#ffdddd</color>
+    <color name="TV">#ddffff</color>
+    <color name="Movie">#dddddd</color>
 </resources>

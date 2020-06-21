@@ -14,7 +14,7 @@ public class PostInfo implements Serializable {
     private Date createdAt;
     private String nid;//유저 닉네임
     private String id;//문서 이름(파이어베이스 문서 이름)
-    private String boardSelect;
+    private String boardSelect="Music";
     private int numComments=0;
 
     public PostInfo(String title, ArrayList<String> contents,String boardSelect, ArrayList<String> formats, String publisher, Date createdAt,String id, String nid){
@@ -45,6 +45,18 @@ public class PostInfo implements Serializable {
         this.nid = nid;
         this.id = id;
     }
+
+    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt, String id,String nid,String boardSelect){
+        this.title = title;
+        this.contents = contents;
+        this.formats = formats;
+        this.publisher = publisher;
+        this.createdAt = createdAt;
+        this.nid = nid;
+        this.id = id;
+        this.boardSelect=boardSelect;
+    }
+
 
     public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt){
         this.title = title;

@@ -174,7 +174,7 @@ public class CategoryMainActivity  extends AppCompatActivity implements View.OnC
                             }
                             for (QueryDocumentSnapshot document : task.getResult()) {
 //                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                if (category_name.equals(document.getData().get("boardSelect").toString()))
+                                if (category_name.equals(document.getData().get("boardSelect").toString())) {
                                     postList.add(new PostInfo(
                                             document.getData().get("title").toString(),
                                             (ArrayList<String>) document.getData().get("contents"),
@@ -182,7 +182,10 @@ public class CategoryMainActivity  extends AppCompatActivity implements View.OnC
                                             document.getData().get("publisher").toString(),
                                             new Date(document.getDate("createdAt").getTime()),
                                             document.getId(),
-                                            document.getData().get("nid").toString()));
+                                            document.getData().get("nid").toString(),
+                                            category_name)
+                                    );
+                                }
                             }
                             categoryBoardAdapter.notifyDataSetChanged();
                         } else {

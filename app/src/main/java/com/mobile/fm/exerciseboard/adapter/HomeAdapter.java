@@ -74,6 +74,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, PostActivity.class);
+                intent.putExtra("category",mDataset.get(mainViewHolder.getAdapterPosition()).getBoardSelect());
+                System.out.println("여기가어디야ㅡ야야");
                 intent.putExtra("postInfo", mDataset.get(mainViewHolder.getAdapterPosition()));
                 intent.putExtra("postId",mDataset.get(mainViewHolder.getAdapterPosition()).getId());
                 activity.startActivity(intent);
