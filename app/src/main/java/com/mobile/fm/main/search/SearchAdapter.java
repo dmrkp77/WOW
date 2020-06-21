@@ -99,7 +99,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MainViewHo
         titleTextView.setText(postInfo.getTitle());
 
         ReadContentsVIew readContentsVIew = cardView.findViewById(R.id.ssearch_readContentsView);
-        LinearLayout contentsLayout = cardView.findViewById(R.id.so_contentsLayout);
+        LinearLayout contentsLayout = cardView.findViewById(R.id.contentsLayout);
 
         if (contentsLayout.getTag() == null || !contentsLayout.getTag().equals(postInfo)) {
             contentsLayout.setTag(postInfo);

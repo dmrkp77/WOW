@@ -84,7 +84,7 @@ public class ReadContentsVIew extends LinearLayout {
         time += " | ";
         time += postInfo.getNid();
         createdAtTextView.setText(time);
-        LinearLayout contentsLayout = findViewById(R.id.so_contentsLayout);
+        LinearLayout contentsLayout = findViewById(R.id.contentsLayout);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ArrayList<String> contentsList = postInfo.getContents();
         ArrayList<String> formatList = postInfo.getFormats();

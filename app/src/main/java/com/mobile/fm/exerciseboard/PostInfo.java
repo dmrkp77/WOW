@@ -69,7 +69,7 @@ public class PostInfo implements Serializable {
     }
 
 
-    public PostInfo(String title, ArrayList<String> contents, ArrayList<String> formats, String publisher, Date createdAt){
+    public PostInfo(String title, ArrayList<String> contents, String boardSelect, ArrayList<String> formats, String publisher, Date createdAt, String id, String nid, String select, Object numComments){
         this.title = title;
         this.contents = contents;
         this.formats = formats;
@@ -86,6 +86,7 @@ public class PostInfo implements Serializable {
         docData.put("createdAt",createdAt);
         docData.put("nid",nid);
         docData.put("boardSelect",boardSelect);
+        docData.put("numComments",numComments);
         return  docData;
     }
 

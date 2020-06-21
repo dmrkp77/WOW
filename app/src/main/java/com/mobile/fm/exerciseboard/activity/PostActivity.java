@@ -173,8 +173,7 @@ public class PostActivity extends BasicActivity {
                 @Override
                 public Void apply(Transaction transaction) throws FirebaseFirestoreException {
                     DocumentSnapshot snapshot = transaction.get(postRef);
-                    postInfo.setNumComments(postInfo.getNumComments()+1);
-                    Long numComments = postInfo.getNumComments();
+                    long numComments = postInfo.getNumComments()+1;
                     transaction.update(postRef,"numComments",numComments);
                     commentRef=FirebaseFirestore.getInstance().collection("posts").document(postId).collection("comments").document();
                     final HashMap<String, Object> data =  new HashMap<>();

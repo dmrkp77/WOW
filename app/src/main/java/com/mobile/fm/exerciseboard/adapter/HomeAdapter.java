@@ -101,7 +101,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
         titleTextView.setText(postInfo.getTitle());
 
         ReadContentsVIew readContentsVIew = cardView.findViewById(R.id.readContentsView);
-        LinearLayout contentsLayout = cardView.findViewById(R.id.so_contentsLayout);
+        LinearLayout contentsLayout = cardView.findViewById(R.id.contentsLayout);
 
         if (contentsLayout.getTag() == null || !contentsLayout.getTag().equals(postInfo)) {
             contentsLayout.setTag(postInfo);

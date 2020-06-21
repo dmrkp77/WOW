@@ -269,6 +269,7 @@ public class WritePostActivity extends BasicActivity {
             StorageReference storageRef = storage.getReference();
             final DocumentReference documentReference = postInfo == null ? firebaseFirestore.collection("posts").document() : firebaseFirestore.collection("posts").document(postInfo.getId());
             final Date date = postInfo == null ? new Date() : postInfo.getCreatedAt();
+            final long comentnum = postInfo == null ? (long)0 : postInfo.getNumComments();
             for (int i = 0; i < parent.getChildCount(); i++) {
                 LinearLayout linearLayout;
                 if(parent.getChildAt(i) instanceof LinearLayout) {
@@ -321,7 +322,7 @@ public class WritePostActivity extends BasicActivity {
                                                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                         Map<String,Object> snap = task.getResult().getData();
                                                         uId = snap.get("username").toString();
-                                                        PostInfo postInfo = new PostInfo(title, contentsList,category, formatList, user.getUid(), date,uId);
+                                                        PostInfo postInfo = new PostInfo(title, contentsList,formatList, user.getUid(), date,user.getUid(),uId,category,comentnum );
                                                         storeUpload(documentReference, postInfo);
                                                     }
                                                 });
@@ -345,7 +346,7 @@ public class WritePostActivity extends BasicActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         Map<String,Object> snap = task.getResult().getData();
                         uId = snap.get("username").toString();
-                        storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date,uId,category, (long) 0));
+                        storeUpload(documentReference, new PostInfo(title, contentsList, formatList, user.getUid(), date,user.getUid(),uId,category, comentnum));
                     }
 
                 });
