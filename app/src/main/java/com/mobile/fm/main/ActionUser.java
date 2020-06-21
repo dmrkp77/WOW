@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +33,7 @@ import com.mobile.fm.main.userinfo.UserInfoActivity;
 import javax.annotation.Nullable;
 
 public class ActionUser extends Fragment {
+    private final String TAG = "ActionUser";
     ViewGroup viewGroup;
 
     ContentActivity activity;
@@ -47,7 +50,7 @@ public class ActionUser extends Fragment {
     private Button buttonLogout;
     private TextView textViewNickName;
     private TextView textViewUserEmail;
-    private TextView textivewDelete;
+    private TextView textViewDelete;
     private FirebaseFirestore db;
     private DocumentReference docRef;
 
@@ -61,11 +64,11 @@ public class ActionUser extends Fragment {
         textViewUserEmail = (TextView) viewGroup.findViewById(R.id.textviewUserEmail);
         buttonUserInfo = (Button) viewGroup.findViewById(R.id.buttonUserInfo);
         buttonLogout = (Button) viewGroup.findViewById(R.id.buttonLogout);
-        textivewDelete = (TextView) viewGroup.findViewById(R.id.textviewDelete);
+        textViewDelete = (TextView) viewGroup.findViewById(R.id.textviewDelete);
 
         buttonUserInfo.setOnClickListener(listener);
         buttonLogout.setOnClickListener(listener);
-        textivewDelete.setOnClickListener(listener);
+        textViewDelete.setOnClickListener(listener);
 
 
         //textViewUserEmail의 내용을 변경해 준다.
@@ -135,7 +138,7 @@ public class ActionUser extends Fragment {
             }
 
             //계정삭제 버튼 추가
-            if (view == textivewDelete) {
+            if (view == textViewDelete) {
                 AlertDialog.Builder alert_confirm = new AlertDialog.Builder(getContext());
                 alert_confirm.setMessage("정말 계정을 삭제 할까요?").setCancelable(false).
 
@@ -147,9 +150,10 @@ public class ActionUser extends Fragment {
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
+                                                deleteUserInfo();
                                                 Toast.makeText(getContext(), "계정이 삭제 되었습니다.", Toast.LENGTH_LONG).show();
-                                                //finish();
-                                                startActivity(new Intent(getContext(), LoginActivity.class));
+                                                activity.Logout();
+//                                                startActivity(new Intent(getContext(), LoginActivity.class));
                                             }
                                         });
                             }
@@ -157,9 +161,29 @@ public class ActionUser extends Fragment {
 
                 alert_confirm.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) { }});
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getContext(), "취소하였습니다.", Toast.LENGTH_LONG).show();
+                    }
+                });
                 alert_confirm.show();
             }
         }
     };
+
+    public void deleteUserInfo(){
+        docRef.
+                delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+    }
 }

@@ -51,7 +51,7 @@
         <TextView
             android:id="@+id/textviewNickname"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="5dp"
             android:text=""
@@ -109,7 +109,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
                         android:layout_marginTop="5dp"
-                        android:text="사용자정보"
+                        android:text="User Information"
                         android:textColor="#5e5e5e"
                         android:textSize="16dp" />
                 </RelativeLayout>
@@ -148,7 +148,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerInParent="true"
                         android:layout_marginTop="5dp"
-                        android:text="로그아웃"
+                        android:text="Logout"
                         android:textColor="#5e5e5e"
                         android:textSize="16dp" />
                 </RelativeLayout>
@@ -158,12 +158,24 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textviewDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="16dp"
-        android:text="회원탈퇴 합니다." />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you want to leave our App?"
+            android:layout_marginRight="5dp"/>
 
+        <TextView
+            android:id="@+id/textviewDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#00a"
+            android:text="DELETE"
+            android:textStyle="bold"/>
+    </LinearLayout>
 </LinearLayout>
