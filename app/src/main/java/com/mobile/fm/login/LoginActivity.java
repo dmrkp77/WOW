@@ -2,7 +2,6 @@ package com.mobile.fm.login;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -23,21 +22,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.mobile.fm.BackPressHandler;
 import com.mobile.fm.PreferenceManager;
 import com.mobile.fm.main.ContentActivity;
 import com.mobile.fm.R;
-import com.mobile.fm.exerciseboard.activity.WritePostActivity;
+
+import org.w3c.dom.Text;
 
 public class LoginActivity extends AppCompatActivity {
     //define view objects
 
-//    String id, pw;
+    //    String id, pw;
     private CheckBox saveIdPassword;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private Button buttonSignin;
-    private TextView textviewSingin;
+    private Button buttonLogin;
+    private TextView textviewSignup;
     private TextView textviewMessage;
     private TextView textviewFindPassword;
     private ProgressDialog progressDialog;
@@ -64,10 +63,10 @@ public class LoginActivity extends AppCompatActivity {
         //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        textviewSingin = (TextView) findViewById(R.id.textViewSignin);
         textviewMessage = (TextView) findViewById(R.id.textviewMessage);
         textviewFindPassword = (TextView) findViewById(R.id.textViewFindpassword);
-        buttonSignin = (Button) findViewById(R.id.buttonSignup);
+        textviewSignup = (TextView) findViewById(R.id.textviewSignup);
+        buttonLogin = (Button) findViewById(R.id.buttonLogin);
         progressDialog = new ProgressDialog(this);
 
 
@@ -84,8 +83,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         //button click event
-        buttonSignin.setOnClickListener(listener);
-        textviewSingin.setOnClickListener(listener);
+        buttonLogin.setOnClickListener(listener);
+        textviewSignup.setOnClickListener(listener);
         textviewFindPassword.setOnClickListener(listener);
         saveIdPassword.setOnClickListener(checklistener);
     }
@@ -187,10 +186,10 @@ public class LoginActivity extends AppCompatActivity {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view == buttonSignin) {
+            if (view == buttonLogin) {
                 userLogin();
             }
-            if (view == textviewSingin) {
+            if (view == textviewSignup) {
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
             }
             if (view == textviewFindPassword) {
@@ -208,9 +207,11 @@ public class LoginActivity extends AppCompatActivity {
             backKeyPressedTime = System.currentTimeMillis();
             toast.makeText(this, "\\'뒤로\\' 버튼을 한번 더 누르시면 종료됩니다.",Toast.LENGTH_SHORT).show();
         }
-        else{
+        else if(System.currentTimeMillis() <= backKeyPressedTime + 2000){
             finish();
             toast.cancel();
-            }
+        }
+        else
+            super.onBackPressed();
     }
 }
