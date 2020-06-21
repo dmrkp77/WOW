@@ -100,7 +100,10 @@ public class WritePostActivity extends BasicActivity {
 
         String getcat = getIntent().getStringExtra("category");// 스피너 초기값설정
         for(int i=0;i<=0;i++) {
-            if(getcat==null)continue;
+            if(getcat==null){
+
+
+                continue;}
             if (getcat.equals("Music")) {
                 spinner.setSelection(0);
             } else if (getcat.equals("Reading")) {

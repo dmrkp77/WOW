@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.mobile.fm.R;
 import com.mobile.fm.exerciseboard.FirebaseHelper;
 import com.mobile.fm.exerciseboard.PostInfo;
+import com.mobile.fm.exerciseboard.activity.MainActivity;
 import com.mobile.fm.exerciseboard.activity.PostActivity;
 import com.mobile.fm.exerciseboard.activity.WritePostActivity;
 import com.mobile.fm.exerciseboard.listener.OnPostListener;
@@ -129,6 +130,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MainViewHolder
                 switch (menuItem.getItemId()) {
                     case R.id.modify:
                         if(mDataset.get(position).getPublisher().equals(firebaseUser.getUid())) {
+//                            Intent intent= new Intent(activity, WritePostActivity.class);
+//                            intent.putExtra("category",category_name);
                             myStartActivity(WritePostActivity.class, mDataset.get(position));
                         }else{
                             Toast.makeText(activity, "수정 권한이 없습니다.", Toast.LENGTH_SHORT).show();

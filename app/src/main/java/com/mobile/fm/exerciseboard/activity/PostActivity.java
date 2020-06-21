@@ -86,7 +86,17 @@ public class PostActivity extends BasicActivity {
         commentList = new ArrayList<>();
         firebaseHelper = new FirebaseHelper(this);
         firebaseHelper.setOnPostListener(onPostListener);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        CollectionReference collectionReference = firebaseFirestore.collection("User");
+        collectionReference.document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Map<String,Object> snap = task.getResult().getData();
+                uId = snap.get("username").toString();
 
+
+            }
+        });
         uiUpdate();
 
         init_comment();
@@ -155,17 +165,7 @@ public class PostActivity extends BasicActivity {
     public void addCommentTextClicked(View view) {
         final String commentTxt = enterCommentText.getText().toString();
         postRef = FirebaseFirestore.getInstance().collection("posts").document(postId);
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        CollectionReference collectionReference = firebaseFirestore.collection("User");
-        collectionReference.document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                Map<String,Object> snap = task.getResult().getData();
-                uId = snap.get("username").toString();
 
-
-            }
-        });
         if (view == addCommentText) {
             FirebaseFirestore.getInstance().runTransaction(new Transaction.Function<Void>() {
                 @Override
