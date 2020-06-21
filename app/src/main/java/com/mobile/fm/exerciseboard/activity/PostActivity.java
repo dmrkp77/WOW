@@ -42,9 +42,12 @@ import com.mobile.fm.exerciseboard.listener.OnPostListener;
 import com.mobile.fm.exerciseboard.view.ReadContentsVIew;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class PostActivity extends BasicActivity {
     private static final String TAG ="" ;
@@ -65,6 +68,8 @@ public class PostActivity extends BasicActivity {
     private RecyclerView.LayoutManager layoutManager;
     private CommentAdapter adapter;
     private ArrayList<CommentListItem> commentList;
+    private FirebaseUser user;
+    private String uId;
     private boolean updating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,7 @@ public class PostActivity extends BasicActivity {
         commentList = new ArrayList<>();
         firebaseHelper = new FirebaseHelper(this);
         firebaseHelper.setOnPostListener(onPostListener);
+
         uiUpdate();
 
         init_comment();
@@ -108,10 +114,30 @@ public class PostActivity extends BasicActivity {
                                commentList.clear();
                             }
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                //시간 얻기
+                                Date ndate= new Date();
+                                Date ydate= document.getDate("createdAt");
+                                long diff=ndate.getTime()-ydate.getTime();
+                                diff=diff/60000;
+                                String time;
+                                if(ndate.getDay()!=ydate.getDay()) {
+                                    time= new SimpleDateFormat("MM.dd", Locale.getDefault()).format(document.getDate("createdAt")).toString();
+                                }
+                                else if(diff<61){
+                                    time= diff+"";
+                                    time+="분 전";
+
+                                }else if(diff<3601) {
+                                    time = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(document.getDate("createdAt")).toString();
+                                }
+
+                                else{
+                                    time= new SimpleDateFormat("MM.dd", Locale.getDefault()).format(document.getDate("createdAt")).toString();
+                                }
 //                                Log.d(TAG, document.getId() + " => " + document.getData());
                                     commentList.add(new CommentListItem(
                                             document.getData().get("username").toString(),
-                                            new Date(document.getDate("createdAt").getTime()).toString(),
+                                            time,
                                             document.getData().get("comments").toString()));
                             }
                            adapter.notifyDataSetChanged();
@@ -129,7 +155,17 @@ public class PostActivity extends BasicActivity {
     public void addCommentTextClicked(View view) {
         final String commentTxt = enterCommentText.getText().toString();
         postRef = FirebaseFirestore.getInstance().collection("posts").document(postId);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        CollectionReference collectionReference = firebaseFirestore.collection("User");
+        collectionReference.document(user.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Map<String,Object> snap = task.getResult().getData();
+                uId = snap.get("username").toString();
 
+
+            }
+        });
         if (view == addCommentText) {
             FirebaseFirestore.getInstance().runTransaction(new Transaction.Function<Void>() {
                 @Override
@@ -138,10 +174,10 @@ public class PostActivity extends BasicActivity {
                     int numComments = postInfo.getNumComments()+1;
                     transaction.update(postRef,"numComments",numComments);
                     commentRef=FirebaseFirestore.getInstance().collection("posts").document(postId).collection("comments").document();
+                    final HashMap<String, Object> data =  new HashMap<>();
 
-                    HashMap<String, Object> data =  new HashMap<>();
                     data.put("comments",commentTxt);
-                    data.put("username",FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    data.put("username",uId);
                     data.put("createdAt",new Date());
                     transaction.set(commentRef,data);
 
