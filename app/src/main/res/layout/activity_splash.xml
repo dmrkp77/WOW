@@ -5,5 +5,5 @@
     android:layout_height="match_parent"
     android:paddingLeft="18dp"
     android:paddingRight="18dp"
-    android:background="@drawable/splash_loading">
+    android:background="@drawable/splash_loading_revised">
 </LinearLayout>

@@ -4,67 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#eeeeee"
     android:orientation="vertical"
     tools:context=".login.SignUpActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#eeeeee"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_fm_f0f0f0" />
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:text="회원가입"
-        android:textColor="@color/colorAccent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:text="Register your Email"
+        android:textColor="#050505"
         android:textSize="23dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="이 앱은 회원가입을 해야 정상적으로 사용할 수 있습니다.\n Email로 등록해 주세요." />
-
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
 
         <EditText
             android:id="@+id/editTextEmail"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
-            android:hint="Enter Email"
-            android:inputType="textEmailAddress" />
+            android:background="#f0f0f0"
+            android:hint="Enter email"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="5sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center">
-
-            <EditText
-                android:id="@+id/editTextUserName"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:hint="Enter Username"
-                android:inputType="textPersonName"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
+            android:background="#f0f0f0"
             android:hint="Enter Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:paddingLeft="5sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+
+        <EditText
+            android:id="@+id/editTextUserName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:background="#f0f0f0"
+            android:hint="Enter Username"
+            android:inputType="textPersonName"
+            android:paddingLeft="5sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -73,22 +96,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="15dp"
-        android:text="회원가입" />
+        android:background="#4438afff"
+        android:text="SIGN UP" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/textViewSignin"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="15dp"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:text="회원이시면 여기에서 로그인 해주세요." />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewSignin"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="15dp"-->
+    <!--        android:gravity="center_horizontal"-->
+    <!--        android:text="회원이시면 여기에서 로그인 해주세요." />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/textviewMessage"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_horizontal"-->
-<!--        android:textColor="@color/colorAccent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/textviewMessage"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:textColor="@color/colorAccent" />-->
 
 
 </LinearLayout>
