@@ -190,6 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                 userLogin();
             }
             if (view == textviewSignup) {
+                finish();
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
             }
             if (view == textviewFindPassword) {

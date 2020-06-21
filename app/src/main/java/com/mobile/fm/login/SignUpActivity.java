@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,16 +33,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     //    private BackPressHandler backPressHandler = new BackPressHandler(this);
     //define view objects
-    EditText editTextEmail;
-    EditText editTextPassword;
-    EditText editTextUsername;
-    Button buttonSignup;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+    private EditText editTextUsername;
+    private TextView textviewLogin;
+    private Button buttonSignup;
 
-    //    TextView textviewSingin;
-//    TextView textviewMessage;
-    ProgressDialog progressDialog;
+
+    //    TextView textviewMessage;
+    private ProgressDialog progressDialog;
+
     //define firebase object
-    FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
     private FirebaseUser firebaseUser;
 
@@ -64,14 +67,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         editTextUsername = (EditText) findViewById(R.id.editTextUserName);
-//        textviewSingin = (TextView) findViewById(R.id.textViewSignin);
+        textviewLogin = (TextView) findViewById(R.id.textviewLogin);
 //        textviewMessage = (TextView) findViewById(R.id.textviewMessage);
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
         progressDialog = new ProgressDialog(this);
 
         //button click event
         buttonSignup.setOnClickListener(this);
-//        textviewSingin.setOnClickListener(this);
+        textviewLogin.setOnClickListener(this);
     }
 
     //Firebse creating a new user
@@ -146,7 +149,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (view == buttonSignup) {
             //TODO
             registerUser();
-
         }
+
+        if (view == textviewLogin) {
+            //TODO
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

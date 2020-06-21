@@ -99,14 +99,26 @@
         android:background="#4438afff"
         android:text="SIGN UP" />
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/textViewSignin"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="15dp"-->
-    <!--        android:gravity="center_horizontal"-->
-    <!--        android:text="회원이시면 여기에서 로그인 해주세요." />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account?"
+            android:layout_marginRight="5dp"/>
 
+        <TextView
+            android:id="@+id/textviewLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#00a"
+            android:text="LOGIN"
+            android:textStyle="bold"/>
+    </LinearLayout>
     <!--    <TextView-->
     <!--        android:id="@+id/textviewMessage"-->
     <!--        android:layout_width="wrap_content"-->
