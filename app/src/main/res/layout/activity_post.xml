@@ -23,7 +23,8 @@
             <com.mobile.fm.exerciseboard.view.ReadContentsVIew
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/readContentsView">
+                android:id="@+id/readContentsView"
+                >
 
                 <View
                     android:id="@+id/view"
@@ -37,24 +38,26 @@
                 android:orientation="horizontal"
                 android:layout_below="@+id/postTextLayout"
                 android:layout_marginTop="20dp"
+                android:paddingBottom="10dp"
                 android:weightSum="1.0"
                 android:layout_gravity="bottom">
 
                 <EditText
                     android:id="@+id/enterCommentText"
                     android:layout_width="0dp"
-                    android:layout_weight="0.8"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:hint="Write a comment..."/>
-
                 <Button
                     android:id="@+id/addCommentText"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.2"
-                    android:layout_height="wrap_content"
-                    android:text="Post"
-                    android:onClick="addCommentTextClicked"/>
+                    android:background="@drawable/circlebtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="+"
+                    android:textSize="14sp"
+                    android:onClick="addCommentTextClicked"
+                    />
 
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView

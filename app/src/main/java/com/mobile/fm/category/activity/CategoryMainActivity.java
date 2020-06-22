@@ -1,15 +1,23 @@
 package com.mobile.fm.category.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,6 +69,10 @@ public class CategoryMainActivity  extends AppCompatActivity implements View.OnC
     private CategoryBoardAdapter categoryBoardAdapter;
     private ArrayList<PostInfo> postList;
     private Activity activity;
+    private TextView main_title;
+    private TextView title;
+    private TextView content;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -71,12 +83,15 @@ public class CategoryMainActivity  extends AppCompatActivity implements View.OnC
         //카테고리별로 테마 색상 바꿈, set_background_color에 추가가능.
         category_name =intent.getExtras().getString("category");
         set_background_color(category_name);
+        main_title=findViewById(R.id.category);
+        main_title.setText(category_name);
 
         //btn listener
         recommendations_btn=findViewById(R.id.recommendations_btn);
         board_btn=findViewById(R.id.board_btn);
         recommendations_btn.setOnClickListener(this);
         board_btn.setOnClickListener(this);
+
 
 
         database = FirebaseDatabase.getInstance();

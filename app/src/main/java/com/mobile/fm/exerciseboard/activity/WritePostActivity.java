@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -74,6 +76,8 @@ public class WritePostActivity extends BasicActivity {
     private PostInfo postInfo;
     private String category;
     private int pathCount, successCount;
+    private ImageButton img,vid;
+    private Button chk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +92,12 @@ public class WritePostActivity extends BasicActivity {
         final Spinner spinner= findViewById(R.id.spinner);
 
 
-
-        findViewById(R.id.check).setOnClickListener(onClickListener);
-        findViewById(R.id.image).setOnClickListener(onClickListener);
-        findViewById(R.id.video).setOnClickListener(onClickListener);
+        img=findViewById(R.id.image);
+        vid=findViewById(R.id.video);
+        chk=findViewById(R.id.check);
+        chk.setOnClickListener(onClickListener);
+        img.setOnClickListener(onClickListener);
+        vid.setOnClickListener(onClickListener);
         findViewById(R.id.imageModify).setOnClickListener(onClickListener);
         findViewById(R.id.videoModify).setOnClickListener(onClickListener);
         findViewById(R.id.delete).setOnClickListener(onClickListener);
@@ -104,16 +110,34 @@ public class WritePostActivity extends BasicActivity {
 
                 continue;}
             if (getcat.equals("Music")) {
+                img.setBackground(getResources().getDrawable(R.drawable.btn_music));
+                vid.setBackground(getResources().getDrawable(R.drawable.btn_music));
+                chk.setBackground(getResources().getDrawable(R.drawable.btn_music));
                 spinner.setSelection(0);
             } else if (getcat.equals("Reading")) {
+                img.setBackground(getResources().getDrawable(R.drawable.btn_reading));
+                vid.setBackground(getResources().getDrawable(R.drawable.btn_reading));
+                chk.setBackground(getResources().getDrawable(R.drawable.btn_reading));
                 spinner.setSelection(1);
             } else if (getcat.equals("Travel")) {
+                img.setBackground(getResources().getDrawable(R.drawable.btn_travel));
+                vid.setBackground(getResources().getDrawable(R.drawable.btn_travel));
+                chk.setBackground(getResources().getDrawable(R.drawable.btn_travel));
                 spinner.setSelection(2);
             } else if (getcat.equals("Exercise")) {
+                img.setBackground(getResources().getDrawable(R.drawable.btn_exercise));
+                vid.setBackground(getResources().getDrawable(R.drawable.btn_exercise));
+                chk.setBackground(getResources().getDrawable(R.drawable.btn_exercise));
                 spinner.setSelection(3);
             } else if (getcat.equals("TV")) {
+                img.setBackground(getResources().getDrawable(R.drawable.btn_tv));
+                vid.setBackground(getResources().getDrawable(R.drawable.btn_tv));
+                chk.setBackground(getResources().getDrawable(R.drawable.btn_tv));
                 spinner.setSelection(4);
             } else if (getcat.equals("Movie")) {
+                img.setBackground(getResources().getDrawable(R.drawable.btn_movie));
+                vid.setBackground(getResources().getDrawable(R.drawable.btn_movie));
+                chk.setBackground(getResources().getDrawable(R.drawable.btn_movie));
                 spinner.setSelection(5);
             }
         }

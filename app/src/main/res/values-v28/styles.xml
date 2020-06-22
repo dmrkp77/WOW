@@ -11,4 +11,10 @@
         <item name="android:outlineAmbientShadowColor">#FFF</item>
         <item name="android:outlineSpotShadowColor">#FFF</item>
     </style>
+    <style name="ToolbarTitleText">
+        <item name="android:textSize">23sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+
+    </style>
 </resources>

@@ -74,7 +74,6 @@ public class CategoryRecommendationsAdapter extends RecyclerView.Adapter<Categor
         ImageView cover;
         TextView title;
         TextView content;
-        TextView url;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);

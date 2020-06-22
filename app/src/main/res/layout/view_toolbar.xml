@@ -9,6 +9,7 @@
     android:theme="@style/AppTheme"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:titleTextColor="#363636"
+    app:titleTextAppearance="@style/ToolbarTitleText"
     >
 
 

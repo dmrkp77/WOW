@@ -84,6 +84,14 @@ public class PostActivity extends BasicActivity {
         addCommentText = findViewById(R.id.addCommentText);
         enterCommentText = findViewById(R.id.enterCommentText);
 
+
+        if(category.equals("Music")) addCommentText.setBackground(getResources().getDrawable(R.drawable.btn_music));
+        else if(category.equals("Reading")) addCommentText.setBackground(getResources().getDrawable(R.drawable.btn_reading));
+        else if(category.equals("Travel")) addCommentText.setBackground(getResources().getDrawable(R.drawable.btn_travel));
+        else if(category.equals("Exercise")) addCommentText.setBackground(getResources().getDrawable(R.drawable.btn_exercise));
+        else if(category.equals("TV")) addCommentText.setBackground(getResources().getDrawable(R.drawable.btn_tv));
+        else if(category.equals("Movie")) addCommentText.setBackground(getResources().getDrawable(R.drawable.btn_movie));
+
         firebaseFirestore = FirebaseFirestore.getInstance();
         commentList = new ArrayList<>();
         firebaseHelper = new FirebaseHelper(this);
@@ -102,8 +110,6 @@ public class PostActivity extends BasicActivity {
         uiUpdate();
 
         init_comment();
-
-
     }
     //댓글 가져오기
     private void init_comment(){

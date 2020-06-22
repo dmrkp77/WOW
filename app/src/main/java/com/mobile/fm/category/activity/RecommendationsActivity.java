@@ -35,7 +35,7 @@ public class RecommendationsActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
 
-    private ImageView recommendations_cover;
+    //private ImageView recommendations_cover;
     private TextView recommendations_text;
     private String category_name;
 
@@ -47,7 +47,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommendations);
 
-        recommendations_cover = (ImageView)findViewById(R.id.recommendations_img);
+        //recommendations_cover = (ImageView)findViewById(R.id.recommendations_img);
         recommendations_text= (TextView)findViewById(R.id.recommendations_text);
         recommendations_bg=findViewById(R.id.recommendations_bg);
 
@@ -55,7 +55,7 @@ public class RecommendationsActivity extends AppCompatActivity {
         category_name =intent.getExtras().getString("category");
         NumList=intent.getExtras().getLongArray("num_list");
 
-        recommendations_text.setText(category_name + "Recommendations");
+        recommendations_text.setText(category_name + " Recommendations Today !");
 
         set_background_color(category_name);
 

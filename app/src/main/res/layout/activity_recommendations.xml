@@ -22,23 +22,13 @@
                 android:orientation="vertical"
                 android:background="#0fff"
                 >
-                <ImageView
-                    android:id="@+id/recommendations_img"
-                    android:layout_gravity="center"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:src="@drawable/ic_launcher_background"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    android:layout_centerInParent="true"
-                    android:layout_marginTop="50dp"
-                    />
                 <TextView
                     android:id="@+id/recommendations_text"
-                    android:gravity="center"
-                    android:layout_margin="30dp"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:layout_margin="20dp"
                     android:text="Today's Recommendations!"
-                    android:textSize="20sp"
+                    android:textSize="30sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
