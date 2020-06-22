@@ -211,7 +211,7 @@ public class WritePostActivity extends BasicActivity {
             case 1:
                 if (resultCode == Activity.RESULT_OK) {
                     String path = data.getStringExtra(INTENT_PATH);
-                    pathList.set(parent.indexOfChild((View) selectedImageVIew.getParent()) - 1, path);
+                    pathList.set(parent.indexOfChild((View) selectedImageVIew.getParent()) - 2, path);
                     Glide.with(this).load(path).override(1000).into(selectedImageVIew);
                 }
                 break;
@@ -246,7 +246,7 @@ public class WritePostActivity extends BasicActivity {
                     break;
                 case R.id.delete:
                     final View selectedView = (View) selectedImageVIew.getParent();
-                    String path = pathList.get(parent.indexOfChild(selectedView) - 1);
+                    String path = pathList.get(parent.indexOfChild(selectedView) - 2);
                     if(isStorageUrl(path)){
                         StorageReference desertRef = storageRef.child("posts/" + postInfo.getId() + "/" + storageUrlToName(path));
                         desertRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -264,7 +264,7 @@ public class WritePostActivity extends BasicActivity {
                             }
                         });
                     }else{
-                        pathList.remove(parent.indexOfChild(selectedView) - 1);
+                        pathList.remove(parent.indexOfChild(selectedView) - 2);
                         parent.removeView(selectedView);
                         buttonsBackgroundLayout.setVisibility(View.GONE);
                     }
