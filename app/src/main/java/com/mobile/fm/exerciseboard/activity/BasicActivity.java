@@ -27,22 +27,24 @@ public class BasicActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
     }
 
-    public void setToolbarTitle(String title, String category){
+    public void setToolbarTitle(String title, String category) {
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
+        if (actionBar != null) {
             actionBar.setTitle(title);
-            if(category.equals("Music"))
-                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Music)));
-            else if(category.equals("Reading"))
-                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Reading)));
-            else if(category.equals("Travel"))
-                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Travel)));
-            else if(category.equals("Exercise"))
-                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Exercise)));
-            else if(category.equals("TV"))
-                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.TV)));
-            else if(category.equals("Movie"))
-                actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Movie)));
+            if (category != null) {
+                if (category.equals("Music"))
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Music)));
+                else if (category.equals("Reading"))
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Reading)));
+                else if (category.equals("Travel"))
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Travel)));
+                else if (category.equals("Exercise"))
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Exercise)));
+                else if (category.equals("TV"))
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.TV)));
+                else if (category.equals("Movie"))
+                    actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.Movie)));
+            }
         }
     }
 }
