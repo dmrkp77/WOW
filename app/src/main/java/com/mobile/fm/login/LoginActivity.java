@@ -19,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -111,10 +112,10 @@ public class LoginActivity extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(LoginActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 ActivityCompat.requestPermissions(LoginActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
             } else {
                 ActivityCompat.requestPermissions(LoginActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
             }
         }
 
@@ -142,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(), ContentActivity.class));
                         } else {
                             Toast.makeText(getApplicationContext(), "로그인 실패!", Toast.LENGTH_LONG).show();
-                            textviewMessage.setText("로그인 실패 유형\n - password가 맞지 않습니다.\n -서버에러");
+                            textviewMessage.setText("  로그인 실패 유형\n - password가 맞지 않습니다.\n - 서버에러");
                         }
                     }
                 });
@@ -204,9 +205,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(System.currentTimeMillis() > backKeyPressedTime + 2000){
+        if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
             backKeyPressedTime = System.currentTimeMillis();
-            toast.makeText(this, "\\'뒤로\\' 버튼을 한번 더 누르시면 종료됩니다.",Toast.LENGTH_SHORT).show();
+            toast.makeText(this, "\\'뒤로\\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
             return;
         } else {
             super.onBackPressed();
